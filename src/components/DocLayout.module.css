@@ -103,6 +103,13 @@
   border-right: 2px solid var(--accent2);
 }
 
+.disabled {
+  color: var(--border) !important;
+  cursor: default;
+  pointer-events: none;
+  font-size: 0.83rem;
+}
+
 /* ── Content ── */
 .content {
   flex: 1;

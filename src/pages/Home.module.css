@@ -507,12 +507,243 @@
   line-height: 1.55;
 }
 
+/* ── Mission quote ── */
+.missionQuote {
+  margin: 0 auto 3rem;
+  max-width: 720px;
+}
+
+.missionQuote blockquote {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-style: italic;
+  color: var(--text);
+  line-height: 1.75;
+  border-left: 4px solid var(--accent);
+  padding: 1.25rem 1.75rem;
+  background: linear-gradient(135deg, var(--accent-light), transparent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin: 0;
+}
+
+/* ── Layer grid (four pillars) ── */
+.layerGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.layerCard {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.layerCard:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.layerIcon {
+  font-size: 1.6rem;
+  margin-bottom: 0.6rem;
+}
+
+.layerTitle {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text);
+  margin-bottom: 0.4rem;
+}
+
+.layerCard p {
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── Guide coming soon banner ── */
+.guideComingSoon {
+  background: #fff;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 2.5rem 2rem;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.guideComingSoon p {
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 560px;
+  margin: 0.75rem auto 0.9rem;
+}
+
+.guideComingSoon a {
+  color: var(--accent2);
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.guideComingSoon a:hover {
+  text-decoration: underline;
+}
+
+.guideComingSoonBadge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #7a5200;
+  background: #fffbec;
+  border: 1px solid #f5d87a;
+  border-radius: 999px;
+  padding: 0.25rem 0.75rem;
+}
+
+/* ── Guide grid ── */
+.guideGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.guideCard {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.75rem;
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  position: relative;
+}
+
+.guideCard:hover {
+  border-color: #b5c0f8;
+  box-shadow: var(--shadow);
+}
+
+.guideIcon {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.guideTag {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #7a5200;
+  background: #fffbec;
+  border: 1px solid #f5d87a;
+  border-radius: 999px;
+  padding: 0.2rem 0.6rem;
+  margin-bottom: 0.65rem;
+}
+
+.guideTitle {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.4rem;
+  line-height: 1.35;
+}
+
+.guideDesc {
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.guideCta {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-top: 0.5rem;
+}
+
+.guideCta a {
+  color: var(--accent2);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.guideCta a:hover {
+  text-decoration: underline;
+}
+
+/* ── Community ── */
+.communityGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-top: 0.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.communityCard {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.communityCard:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.communityIcon {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.communityCard h4 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.4rem;
+}
+
+.communityCard p {
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.communityActions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
 /* ── Responsive ── */
 @media (max-width: 900px) {
-  .philoGrid {
+  .layerGrid {
     grid-template-columns: repeat(2, 1fr);
   }
+  .communityGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
   .domainGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .philoGrid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -549,6 +780,15 @@
   .philoGrid {
     grid-template-columns: 1fr;
   }
+  .layerGrid {
+    grid-template-columns: 1fr;
+  }
+  .guideGrid {
+    grid-template-columns: 1fr;
+  }
+  .communityGrid {
+    grid-template-columns: 1fr;
+  }
   .callout {
     flex-direction: column;
     gap: 1.25rem;
@@ -558,5 +798,8 @@
   }
   .toolCardInner {
     padding: 1.25rem;
+  }
+  .missionQuote blockquote {
+    padding: 1rem 1.25rem;
   }
 }

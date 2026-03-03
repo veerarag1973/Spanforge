@@ -6,7 +6,7 @@ export default function DocLayout({ basePath, sidebar, children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const { pathname } = useLocation()
 
-  const allItems = sidebar.flatMap(s => s.items)
+  const allItems = sidebar.flatMap(s => s.items).filter(i => !i.disabled)
   const activeIndex = allItems.findIndex(item => pathname === `${basePath}/${item.path}`)
   const activePage = activeIndex >= 0 ? allItems[activeIndex] : null
   const prevItem = activeIndex > 0 ? allItems[activeIndex - 1] : null
@@ -47,15 +47,21 @@ export default function DocLayout({ basePath, sidebar, children }) {
               <ul>
                 {section.items.map(item => (
                   <li key={item.path}>
-                    <NavLink
-                      to={`${basePath}/${item.path}`}
-                      className={({ isActive }) =>
-                        `${styles.link} ${isActive ? styles.active : ''}`
-                      }
-                      onClick={() => setSidebarOpen(false)}
-                    >
-                      {item.label}
-                    </NavLink>
+                    {item.disabled ? (
+                      <span className={`${styles.link} ${styles.disabled}`}>
+                        {item.label}
+                      </span>
+                    ) : (
+                      <NavLink
+                        to={`${basePath}/${item.path}`}
+                        className={({ isActive }) =>
+                          `${styles.link} ${isActive ? styles.active : ''}`
+                        }
+                        onClick={() => setSidebarOpen(false)}
+                      >
+                        {item.label}
+                      </NavLink>
+                    )}
                   </li>
                 ))}
               </ul>

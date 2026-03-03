@@ -11,6 +11,7 @@ export default function Nav() {
 
   const isLlmDiff = location.pathname.startsWith('/llm-diff')
   const isSchema = location.pathname.startsWith('/llm-toolkit-schema')
+  const isTutorials = location.pathname.startsWith('/learn')
 
   const closeMenu = () => setMenuOpen(false)
 
@@ -39,11 +40,17 @@ export default function Nav() {
           </Link>
 
           <ul className={styles.links}>
-            {!isLlmDiff && !isSchema && (
+            {!isLlmDiff && !isSchema && !isTutorials && (
               <>
-                <li><a href="#observability">Why It Matters</a></li>
+                <li><a href="#mission">Why Here</a></li>
                 <li><a href="#tools">Tools</a></li>
-                <li><a href="#philosophy">Philosophy</a></li>
+                <li><a href="#learn">Education</a></li>
+                <li><a href="#community">Community</a></li>
+              </>
+            )}
+            {isTutorials && (
+              <>
+                <li><Link to="/learn/otel-python/part1">OTel in Python</Link></li>
               </>
             )}
             {isLlmDiff && (
@@ -70,13 +77,11 @@ export default function Nav() {
             </li>
           </ul>
 
-          {(isLlmDiff || isSchema) && (
+          {(isLlmDiff || isSchema || isTutorials) && (
             <div className={styles.productBadge}>
-              {isLlmDiff ? (
-                <span className={styles.productName}>llm-diff</span>
-              ) : (
-                <span className={styles.productName}>llm-toolkit-schema</span>
-              )}
+              {isLlmDiff && <span className={styles.productName}>llm-diff</span>}
+              {isSchema && <span className={styles.productName}>llm-toolkit-schema</span>}
+              {isTutorials && <span className={styles.productName}>Learn</span>}
             </div>
           )}
 
@@ -92,11 +97,17 @@ export default function Nav() {
 
       {menuOpen && (
         <div className={styles.mobileMenu}>
-          {!isLlmDiff && !isSchema && (
+          {!isLlmDiff && !isSchema && !isTutorials && (
             <>
-              <a href="#observability" onClick={closeMenu}>Why It Matters</a>
+              <a href="#mission" onClick={closeMenu}>Why Here</a>
               <a href="#tools" onClick={closeMenu}>Tools</a>
-              <a href="#philosophy" onClick={closeMenu}>Philosophy</a>
+              <a href="#learn" onClick={closeMenu}>Education</a>
+              <a href="#community" onClick={closeMenu}>Community</a>
+            </>
+          )}
+          {isTutorials && (
+            <>
+              <Link to="/learn/otel-python/part1" onClick={closeMenu}>OTel in Python</Link>
             </>
           )}
           {isLlmDiff && (

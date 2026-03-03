@@ -6,6 +6,7 @@ import LlmDiffHome from './pages/LlmDiffHome.jsx'
 import LlmDiffDocs from './pages/LlmDiffDocs.jsx'
 import SchemaHome from './pages/SchemaHome.jsx'
 import SchemaDocs from './pages/SchemaDocs.jsx'
+import TutorialsDocs from './pages/TutorialsDocs.jsx'
 import NotFound from './pages/NotFound.jsx'
 
 function AppRoutes() {
@@ -20,6 +21,8 @@ function AppRoutes() {
         <Route path="/llm-toolkit-schema" element={<SchemaHome />} />
         <Route path="/llm-toolkit-schema/docs" element={<SchemaDocs />} />
         <Route path="/llm-toolkit-schema/docs/*" element={<SchemaDocs />} />
+        <Route path="/learn" element={<TutorialsDocs />} />
+        <Route path="/learn/*" element={<TutorialsDocs />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

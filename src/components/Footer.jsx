@@ -12,7 +12,7 @@ export default function Footer() {
 
         <div className={styles.grid}>
           <div className={styles.col}>
-            <h4 className={styles.colTitle}>Products</h4>
+            <h4 className={styles.colTitle}>Toolkit</h4>
             <ul>
               <li><Link to="/llm-diff">llm-diff</Link></li>
               <li><Link to="/llm-toolkit-schema">llm-toolkit-schema</Link></li>
@@ -29,8 +29,17 @@ export default function Footer() {
           </div>
 
           <div className={styles.col}>
+            <h4 className={styles.colTitle}>Learn</h4>
+            <ul>
+              <li><Link to="/learn/otel-python/part1">OTel in Python — Part 1</Link></li>
+              <li><span style={{ color: 'var(--muted)', fontSize: '0.85rem' }}>More guides coming soon</span></li>
+            </ul>
+          </div>
+
+          <div className={styles.col}>
             <h4 className={styles.colTitle}>Community</h4>
             <ul>
+              <li><a href="https://discord.gg/sv3UzmvR" target="_blank" rel="noopener">Discord</a></li>
               <li><a href="https://github.com/veerarag1973" target="_blank" rel="noopener">GitHub</a></li>
               <li><a href="https://github.com/veerarag1973/llmdiff/issues" target="_blank" rel="noopener">Issues</a></li>
               <li><a href="https://pypi.org/project/llm-diff/" target="_blank" rel="noopener">PyPI</a></li>
@@ -41,7 +50,8 @@ export default function Footer() {
         <hr className={styles.divider} />
 
         <p className={styles.meta}>
-          &copy; {new Date().getFullYear()} Spanforge &mdash; Released under the{' '}
+          &copy; {new Date().getFullYear()} Spanforge &mdash; The home for OpenTelemetry practitioners.{' '}
+          Released under the{' '}
           <a href="/LICENSE" target="_blank" rel="noopener">MIT License</a>.
           Built in the open.
         </p>
