@@ -15,7 +15,6 @@ export default function Footer() {
             <h4 className={styles.colTitle}>Toolkit</h4>
             <ul>
               <li><Link to="/llm-diff">llm-diff</Link></li>
-              <li><Link to="/llm-toolkit-schema">llm-toolkit-schema</Link></li>
               <li><a href="https://github.com/veerarag1973/promptlock" target="_blank" rel="noopener">promptlock</a></li>
             </ul>
           </div>
@@ -24,7 +23,6 @@ export default function Footer() {
             <h4 className={styles.colTitle}>Docs</h4>
             <ul>
               <li><Link to="/llm-diff/docs/getting-started">llm-diff Docs</Link></li>
-              <li><Link to="/llm-toolkit-schema/docs/quickstart">llm-toolkit-schema Docs</Link></li>
             </ul>
           </div>
 

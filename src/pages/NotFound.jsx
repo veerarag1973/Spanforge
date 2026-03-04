@@ -18,7 +18,6 @@ export default function NotFound() {
         <div className={styles.actions}>
           <Link to="/" className="btn btn-primary">← Back to home</Link>
           <Link to="/llm-diff/docs/getting-started" className="btn btn-outline">llm-diff Docs</Link>
-          <Link to="/llm-toolkit-schema/docs/quickstart" className="btn btn-outline">llm-toolkit-schema Docs</Link>
         </div>
       </main>
       <Footer />

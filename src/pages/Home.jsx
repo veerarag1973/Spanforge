@@ -29,29 +29,6 @@ const tools = [
     accentBg: '#f0fdf8',
   },
   {
-    id: 'llm-toolkit-schema',
-    name: 'llm-toolkit-schema',
-    tagline: 'The shared event schema.',
-    description:
-      'Defines the OpenTelemetry-compatible JSON/OTLP event schema that all Spanforge tools emit and consume — the glue that makes the ecosystem composable without custom integration.',
-    features: [
-      'OpenTelemetry-compatible JSON/OTLP format',
-      'HMAC-SHA256 tamper-proof event signing & audit chains',
-      'First-class PII redaction before data leaves your app',
-      'Ships to Grafana, Datadog, OTLP, Kafka, webhooks',
-      '1302 tests · 100% coverage · zero required dependencies',
-      'LangChain & LlamaIndex adapters built in',
-    ],
-    badge: 'done',
-    badgeText: '✅ Available',
-    pkg: 'pip install llm-toolkit-schema',
-    link: '/llm-toolkit-schema',
-    docsLink: '/llm-toolkit-schema/docs/quickstart',
-    ghLink: 'https://github.com/veerarag1973/llm-toolkit-schema',
-    accentColor: '#3d5af1',
-    accentBg: '#f0f3ff',
-  },
-  {
     id: 'promptlock',
     name: 'promptlock',
     tagline: 'The prompt governance layer.',
@@ -62,7 +39,7 @@ const tools = [
       'Diff and rollback across prompt versions',
       'Approval workflows and access controls for enterprise teams',
       'Integrates with llm-diff to surface quality regressions',
-      'Emits llm-toolkit-schema events for full audit trail',
+      'Emits structured observability events for full audit trail',
     ],
     badge: 'dev',
     badgeText: '🔧 Under Development',
@@ -227,12 +204,6 @@ export default function Home() {
                   <td className={styles.tdMuted}>LLM output quality comparison and evaluation</td>
                   <td><span className="badge badge-done">✅ Available</span></td>
                   <td><span className="pkg">pip install llm-diff</span></td>
-                </tr>
-                <tr>
-                  <td><Link to="/llm-toolkit-schema" className={styles.toolLink}>llm-toolkit-schema</Link></td>
-                  <td className={styles.tdMuted}>Shared OpenTelemetry-compatible event schema</td>
-                  <td><span className="badge badge-done">✅ Available</span></td>
-                  <td><span className="pkg">pip install llm-toolkit-schema</span></td>
                 </tr>
                 <tr>
                   <td>

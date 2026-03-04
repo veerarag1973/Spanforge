@@ -4,8 +4,9 @@ import BackToTop from './components/BackToTop.jsx'
 import Home from './pages/Home.jsx'
 import LlmDiffHome from './pages/LlmDiffHome.jsx'
 import LlmDiffDocs from './pages/LlmDiffDocs.jsx'
-import SchemaHome from './pages/SchemaHome.jsx'
-import SchemaDocs from './pages/SchemaDocs.jsx'
+import StandardHome from './pages/StandardHome.jsx'
+import StandardSpec from './pages/StandardSpec.jsx'
+import Feedback from './pages/Feedback.jsx'
 import TutorialsDocs from './pages/TutorialsDocs.jsx'
 import NotFound from './pages/NotFound.jsx'
 
@@ -18,9 +19,9 @@ function AppRoutes() {
         <Route path="/llm-diff" element={<LlmDiffHome />} />
         <Route path="/llm-diff/docs" element={<LlmDiffDocs />} />
         <Route path="/llm-diff/docs/*" element={<LlmDiffDocs />} />
-        <Route path="/llm-toolkit-schema" element={<SchemaHome />} />
-        <Route path="/llm-toolkit-schema/docs" element={<SchemaDocs />} />
-        <Route path="/llm-toolkit-schema/docs/*" element={<SchemaDocs />} />
+        <Route path="/standard" element={<StandardHome />} />
+        <Route path="/standard/spec" element={<StandardSpec />} />
+        <Route path="/standard/feedback" element={<Feedback />} />
         <Route path="/learn" element={<TutorialsDocs />} />
         <Route path="/learn/*" element={<TutorialsDocs />} />
         <Route path="*" element={<NotFound />} />

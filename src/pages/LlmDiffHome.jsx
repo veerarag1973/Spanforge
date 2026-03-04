@@ -198,7 +198,7 @@ llm-diff --batch prompts.yml -a gpt-4o -b gpt-4o-mini --semantic --fail-under 0.
               { path: 'getting-started', label: 'Getting Started', desc: 'Installation, API keys, first diff' },
               { path: 'cli-reference', label: 'CLI Reference', desc: 'All flags, option groups, exit codes, YAML format' },
               { path: 'api', label: 'Python API', desc: 'All public functions, dataclasses, and field descriptions' },
-              { path: 'schema-events', label: 'Schema Events', desc: 'Observability integration with llm-toolkit-schema' },
+              { path: 'schema-events', label: 'Schema Events', desc: 'Observability events emitted by llm-diff' },
               { path: 'configuration', label: 'Configuration', desc: '.llmdiff TOML schema, env vars, config priority' },
               { path: 'providers', label: 'Provider Setup', desc: 'OpenAI, Groq, Mistral, Ollama, LM Studio, Anthropic' },
               { path: 'html-reports', label: 'HTML Reports', desc: 'Report anatomy, batch reports, judge card, cost table' },
