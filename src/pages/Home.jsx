@@ -75,7 +75,7 @@ export default function Home() {
             Where OpenTelemetry meets agentic AI. Tools, education, and community for engineers who need to trust their agents.
           </p>
           <div className={styles.heroActions}>
-            <a href="#tools" className="btn btn-primary">Explore the Toolkit</a>
+            <Link to="/tools/core" className="btn btn-primary">Explore the Toolkit</Link>
             <a href="#learn" className="btn btn-secondary">Read the Guides ↓</a>
           </div>
           <div className={styles.heroBadges}>

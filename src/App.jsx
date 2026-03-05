@@ -10,6 +10,9 @@ import Feedback from './pages/Feedback.jsx'
 import TutorialsDocs from './pages/TutorialsDocs.jsx'
 import AgentObsHome from './pages/AgentObsHome.jsx'
 import AgentObsDocs from './pages/AgentObsDocs.jsx'
+import ToolsCoreHome from './pages/ToolsCoreHome.jsx'
+import AgentObsDebugHome from './pages/AgentObsDebugHome.jsx'
+import AgentObsDebugDocs from './pages/AgentObsDebugDocs.jsx'
 import NotFound from './pages/NotFound.jsx'
 
 function AppRoutes() {
@@ -26,9 +29,14 @@ function AppRoutes() {
         <Route path="/standard/feedback" element={<Feedback />} />
         <Route path="/learn" element={<TutorialsDocs />} />
         <Route path="/learn/*" element={<TutorialsDocs />} />
+        <Route path="/tools" element={<ToolsCoreHome />} />
+        <Route path="/tools/core" element={<ToolsCoreHome />} />
         <Route path="/sdk" element={<AgentObsHome />} />
         <Route path="/sdk/docs" element={<AgentObsDocs />} />
         <Route path="/sdk/docs/*" element={<AgentObsDocs />} />
+        <Route path="/agentobs-debug" element={<AgentObsDebugHome />} />
+        <Route path="/agentobs-debug/docs" element={<AgentObsDebugDocs />} />
+        <Route path="/agentobs-debug/docs/*" element={<AgentObsDebugDocs />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

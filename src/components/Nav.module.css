@@ -72,6 +72,59 @@
   background: var(--accent2-light);
 }
 
+.dropdown {
+  position: relative;
+}
+
+.dropdownToggle {
+  color: var(--muted);
+  background: transparent;
+  border: none;
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+  transition: color 0.15s, background 0.15s;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.dropdownToggle:hover {
+  color: var(--text);
+  background: var(--surface);
+}
+
+.dropdown:focus-within .submenu,
+.dropdown:hover .submenu {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.submenu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 140px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: 0 10px 24px rgba(12, 22, 40, 0.12);
+  padding: 0.35rem;
+  opacity: 0;
+  transform: translateY(-4px);
+  pointer-events: none;
+  transition: opacity 0.15s, transform 0.15s;
+  z-index: 120;
+}
+
+.submenu a {
+  display: block;
+  padding: 0.5rem 0.65rem;
+  border-radius: 8px;
+}
+
 .productBadge {
   margin-left: 0.5rem;
   flex-shrink: 0;
@@ -148,6 +201,12 @@
 
 .mobileMenu a:hover {
   color: var(--accent);
+}
+
+.mobileSubLink {
+  padding-left: 1.25rem !important;
+  font-size: 0.9rem !important;
+  color: var(--muted) !important;
 }
 
 @media (max-width: 640px) {

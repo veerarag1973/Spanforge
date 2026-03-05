@@ -13,6 +13,8 @@ export default function Nav() {
   const isStandard = location.pathname.startsWith('/standard')
   const isTutorials = location.pathname.startsWith('/learn')
   const isSdk = location.pathname.startsWith('/sdk')
+  const isTools = location.pathname.startsWith('/tools')
+  const isAgentObsDebug = location.pathname.startsWith('/agentobs-debug')
 
   const closeMenu = () => setMenuOpen(false)
 
@@ -41,14 +43,25 @@ export default function Nav() {
           </Link>
 
           <ul className={styles.links}>
-            {!isLlmDiff && !isStandard && !isTutorials && !isSdk && (
+            <li className={styles.dropdown}>
+              <button type="button" className={styles.dropdownToggle}>The Tools</button>
+              <div className={styles.submenu}>
+                <Link to="/tools/core">Core</Link>
+              </div>
+            </li>
+            {!isLlmDiff && !isStandard && !isTutorials && !isSdk && !isTools && !isAgentObsDebug && (
               <>
                 <li><a href="#mission">Why Here</a></li>
-                <li><a href="#tools">Tools</a></li>
                 <li><Link to="/standard">The Standard</Link></li>
                 <li><Link to="/sdk">The SDK</Link></li>
                 <li><a href="#learn">Education</a></li>
                 <li><a href="#community">Community</a></li>
+              </>
+            )}
+            {isTools && (
+              <>
+                <li><Link to="/llm-diff">llm-diff</Link></li>
+                <li><Link to="/agentobs-debug">AgentOBSDebug</Link></li>
               </>
             )}
             {isStandard && (
@@ -76,6 +89,13 @@ export default function Nav() {
                 <li><Link to="/sdk/docs/ns-index">Namespaces</Link></li>
               </>
             )}
+            {isAgentObsDebug && (
+              <>
+                <li><Link to="/agentobs-debug">Overview</Link></li>
+                <li><Link to="/agentobs-debug/docs/api-reference">API Reference</Link></li>
+                <li><Link to="/agentobs-debug/docs/tutorial">Tutorial</Link></li>
+              </>
+            )}
             <li>
               <a
                 href="https://github.com/veerarag1973"
@@ -88,12 +108,14 @@ export default function Nav() {
             </li>
           </ul>
 
-          {(isLlmDiff || isStandard || isTutorials || isSdk) && (
+          {(isLlmDiff || isStandard || isTutorials || isSdk || isTools || isAgentObsDebug) && (
             <div className={styles.productBadge}>
               {isLlmDiff && <span className={styles.productName}>llm-diff</span>}
               {isStandard && <span className={styles.productName}>The Standard</span>}
               {isTutorials && <span className={styles.productName}>Learn</span>}
               {isSdk && <span className={styles.productName}>AgentOBS</span>}
+              {isTools && <span className={styles.productName}>The Tools</span>}
+              {isAgentObsDebug && <span className={styles.productName}>AgentOBSDebug</span>}
             </div>
           )}
 
@@ -109,14 +131,21 @@ export default function Nav() {
 
       {menuOpen && (
         <div className={styles.mobileMenu}>
-          {!isLlmDiff && !isStandard && !isTutorials && !isSdk && (
+          <Link to="/tools/core" onClick={closeMenu}>The Tools</Link>
+          <Link to="/tools/core" onClick={closeMenu} className={styles.mobileSubLink}>Core</Link>
+          {!isLlmDiff && !isStandard && !isTutorials && !isSdk && !isTools && !isAgentObsDebug && (
             <>
               <a href="#mission" onClick={closeMenu}>Why Here</a>
-              <a href="#tools" onClick={closeMenu}>Tools</a>
               <Link to="/standard" onClick={closeMenu}>The Standard</Link>
               <Link to="/sdk" onClick={closeMenu}>The SDK</Link>
               <a href="#learn" onClick={closeMenu}>Education</a>
               <a href="#community" onClick={closeMenu}>Community</a>
+            </>
+          )}
+          {isTools && (
+            <>
+              <Link to="/llm-diff" onClick={closeMenu}>llm-diff</Link>
+              <Link to="/agentobs-debug" onClick={closeMenu}>AgentOBSDebug</Link>
             </>
           )}
           {isStandard && (
@@ -142,6 +171,13 @@ export default function Nav() {
               <Link to="/sdk/docs/quickstart" onClick={closeMenu}>Quickstart</Link>
               <Link to="/sdk/docs/api-index" onClick={closeMenu}>API Reference</Link>
               <Link to="/sdk/docs/ns-index" onClick={closeMenu}>Namespaces</Link>
+            </>
+          )}
+          {isAgentObsDebug && (
+            <>
+              <Link to="/agentobs-debug" onClick={closeMenu}>Overview</Link>
+              <Link to="/agentobs-debug/docs/api-reference" onClick={closeMenu}>API Reference</Link>
+              <Link to="/agentobs-debug/docs/tutorial" onClick={closeMenu}>Tutorial</Link>
             </>
           )}
           <a
