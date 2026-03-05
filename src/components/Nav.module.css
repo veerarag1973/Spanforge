@@ -183,6 +183,8 @@
   flex-direction: column;
   gap: 0;
   box-shadow: 0 6px 20px rgba(0,0,0,.08);
+  max-height: calc(100vh - 64px);
+  overflow-y: auto;
 }
 
 .mobileMenu a {
@@ -209,7 +211,10 @@
   color: var(--muted) !important;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 900px) {
+  .navInner {
+    padding: 0 1rem;
+  }
   .links { display: none; }
   .toggle { display: flex; }
   .productBadge { display: none; }

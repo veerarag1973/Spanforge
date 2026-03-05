@@ -647,6 +647,10 @@
     display: flex;
   }
 
+  .specTocCollapsed {
+    display: none;
+  }
+
   .specBody {
     padding: 1.5rem 1rem 3rem;
   }

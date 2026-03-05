@@ -83,7 +83,7 @@ export default function StandardSpec() {
         </button>
 
         {/* Table of Contents */}
-        <div className={styles.specToc} style={tocOpen ? {} : undefined}>
+        <div className={`${styles.specToc} ${!tocOpen ? styles.specTocCollapsed : ''}`}>
           <h2>Table of Contents</h2>
           <ol>
             {TOC_ITEMS.map(item => (

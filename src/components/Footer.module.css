@@ -87,9 +87,16 @@
   text-decoration: underline;
 }
 
-@media (max-width: 520px) {
+@media (max-width: 900px) {
   .grid {
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
 }
