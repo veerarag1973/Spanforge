@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeHighlight from 'rehype-highlight'
@@ -34,7 +35,7 @@ function PreWithCopy({ children, ...props }) {
   )
 }
 
-export default function MarkdownRenderer({ content }) {
+export default function MarkdownRenderer({ content, resolveLink }) {
   return (
     <div className={styles.markdown}>
       <ReactMarkdown
@@ -43,15 +44,19 @@ export default function MarkdownRenderer({ content }) {
         components={{
           pre: PreWithCopy,
           a: ({ href, children, ...props }) => {
-            const isExternal = href && (href.startsWith('http') || href.startsWith('//'))
+            const resolvedHref = resolveLink ? resolveLink(href) : href
+            const isExternal = resolvedHref && (resolvedHref.startsWith('http') || resolvedHref.startsWith('//'))
             if (isExternal) {
               return (
-                <a href={href} target="_blank" rel="noopener noreferrer" {...props}>
+                <a href={resolvedHref} target="_blank" rel="noopener noreferrer" {...props}>
                   {children}
                 </a>
               )
             }
-            return <a href={href} {...props}>{children}</a>
+            if (resolvedHref && resolvedHref.startsWith('/')) {
+              return <Link to={resolvedHref} {...props}>{children}</Link>
+            }
+            return <a href={resolvedHref} {...props}>{children}</a>
           },
           img: ({ src, alt, ...props }) => (
             <img src={src} alt={alt} className={styles.img} {...props} />

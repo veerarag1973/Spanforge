@@ -60,55 +60,86 @@ import nsAuditMd from '../../AgentOBS/docs/namespaces/audit.md?raw'
 import schemaMd from '../../AgentOBS/docs/schema/README.md?raw'
 
 const DOC_MAP = {
-  'overview': readmeMd,
-  'quickstart': quickstartMd,
-  'installation': installationMd,
-  'changelog': changelogMd,
-  'cli': cliMd,
-  'contributing': contributingMd,
+  'overview': { content: readmeMd, source: 'README.md' },
+  'quickstart': { content: quickstartMd, source: 'quickstart.md' },
+  'installation': { content: installationMd, source: 'installation.md' },
+  'changelog': { content: changelogMd, source: 'changelog.md' },
+  'cli': { content: cliMd, source: 'cli.md' },
+  'contributing': { content: contributingMd, source: 'contributing.md' },
   // User Guide
-  'user-guide-index': ugIndexMd,
-  'user-guide-events': ugEventsMd,
-  'user-guide-signing': ugSigningMd,
-  'user-guide-redaction': ugRedactionMd,
-  'user-guide-compliance': ugComplianceMd,
-  'user-guide-export': ugExportMd,
-  'user-guide-governance': ugGovernanceMd,
-  'user-guide-migration': ugMigrationMd,
+  'user-guide-index': { content: ugIndexMd, source: 'user_guide/index.md' },
+  'user-guide-events': { content: ugEventsMd, source: 'user_guide/events.md' },
+  'user-guide-signing': { content: ugSigningMd, source: 'user_guide/signing.md' },
+  'user-guide-redaction': { content: ugRedactionMd, source: 'user_guide/redaction.md' },
+  'user-guide-compliance': { content: ugComplianceMd, source: 'user_guide/compliance.md' },
+  'user-guide-export': { content: ugExportMd, source: 'user_guide/export.md' },
+  'user-guide-governance': { content: ugGovernanceMd, source: 'user_guide/governance.md' },
+  'user-guide-migration': { content: ugMigrationMd, source: 'user_guide/migration.md' },
   // API Reference
-  'api-index': apiIndexMd,
-  'api-event': apiEventMd,
-  'api-types': apiTypesMd,
-  'api-signing': apiSigningMd,
-  'api-redact': apiRedactMd,
-  'api-compliance': apiComplianceMd,
-  'api-export': apiExportMd,
-  'api-stream': apiStreamMd,
-  'api-validate': apiValidateMd,
-  'api-migrate': apiMigrateMd,
-  'api-consumer': apiConsumerMd,
-  'api-governance': apiGovernanceMd,
-  'api-deprecations': apiDeprecationsMd,
-  'api-integrations': apiIntegrationsMd,
-  'api-ulid': apiUlidMd,
-  'api-exceptions': apiExceptionsMd,
-  'api-models': apiModelsMd,
+  'api-index': { content: apiIndexMd, source: 'api/index.md' },
+  'api-event': { content: apiEventMd, source: 'api/event.md' },
+  'api-types': { content: apiTypesMd, source: 'api/types.md' },
+  'api-signing': { content: apiSigningMd, source: 'api/signing.md' },
+  'api-redact': { content: apiRedactMd, source: 'api/redact.md' },
+  'api-compliance': { content: apiComplianceMd, source: 'api/compliance.md' },
+  'api-export': { content: apiExportMd, source: 'api/export.md' },
+  'api-stream': { content: apiStreamMd, source: 'api/stream.md' },
+  'api-validate': { content: apiValidateMd, source: 'api/validate.md' },
+  'api-migrate': { content: apiMigrateMd, source: 'api/migrate.md' },
+  'api-consumer': { content: apiConsumerMd, source: 'api/consumer.md' },
+  'api-governance': { content: apiGovernanceMd, source: 'api/governance.md' },
+  'api-deprecations': { content: apiDeprecationsMd, source: 'api/deprecations.md' },
+  'api-integrations': { content: apiIntegrationsMd, source: 'api/integrations.md' },
+  'api-ulid': { content: apiUlidMd, source: 'api/ulid.md' },
+  'api-exceptions': { content: apiExceptionsMd, source: 'api/exceptions.md' },
+  'api-models': { content: apiModelsMd, source: 'api/models.md' },
   // Namespace Catalogue
-  'ns-index': nsIndexMd,
-  'ns-trace': nsTraceMd,
-  'ns-cost': nsCostMd,
-  'ns-cache': nsCacheMd,
-  'ns-diff': nsDiffMd,
-  'ns-eval': nsEvalMd,
-  'ns-fence': nsFenceMd,
-  'ns-guard': nsGuardMd,
-  'ns-prompt': nsPromptMd,
-  'ns-redact': nsRedactMd,
-  'ns-template': nsTemplateMd,
-  'ns-audit': nsAuditMd,
+  'ns-index': { content: nsIndexMd, source: 'namespaces/index.md' },
+  'ns-trace': { content: nsTraceMd, source: 'namespaces/trace.md' },
+  'ns-cost': { content: nsCostMd, source: 'namespaces/cost.md' },
+  'ns-cache': { content: nsCacheMd, source: 'namespaces/cache.md' },
+  'ns-diff': { content: nsDiffMd, source: 'namespaces/diff.md' },
+  'ns-eval': { content: nsEvalMd, source: 'namespaces/eval.md' },
+  'ns-fence': { content: nsFenceMd, source: 'namespaces/fence.md' },
+  'ns-guard': { content: nsGuardMd, source: 'namespaces/guard.md' },
+  'ns-prompt': { content: nsPromptMd, source: 'namespaces/prompt.md' },
+  'ns-redact': { content: nsRedactMd, source: 'namespaces/redact_ns.md' },
+  'ns-template': { content: nsTemplateMd, source: 'namespaces/template.md' },
+  'ns-audit': { content: nsAuditMd, source: 'namespaces/audit.md' },
   // Schema
-  'schema': schemaMd,
+  'schema': { content: schemaMd, source: 'schema/README.md' },
 }
+
+const SOURCE_TO_PAGE = Object.entries(DOC_MAP).reduce((acc, [page, doc]) => {
+  acc[doc.source] = page
+  return acc
+}, {
+  // Alias docs landing to existing overview page.
+  'index.md': 'overview',
+})
+
+function normalizePath(path) {
+  const parts = path.split('/').filter(Boolean)
+  const out = []
+  for (const p of parts) {
+    if (p === '.') continue
+    if (p === '..') {
+      if (out.length) out.pop()
+      continue
+    }
+    out.push(p)
+  }
+  return out.join('/')
+}
+
+function resolveRelativePath(fromFile, relativePath) {
+  const fromParts = fromFile.split('/').filter(Boolean)
+  const fromDir = fromParts.slice(0, -1).join('/')
+  const base = fromDir ? `${fromDir}/${relativePath}` : relativePath
+  return normalizePath(base)
+}
+
+const AGENTOBS_GITHUB_BASE = 'https://github.com/veerarag1973/agentobs/blob/main'
 
 const SIDEBAR = [
   {
@@ -199,9 +230,45 @@ export default function AgentObsDocs() {
   const params = useParams()
   const currentPage = params['*'] || 'quickstart'
 
-  const content = DOC_MAP[currentPage]
+  const currentDoc = DOC_MAP[currentPage]
+  const content = currentDoc?.content
   const pageLabel = SIDEBAR.flatMap(s => s.items).find(i => i.path === currentPage)?.label || 'Docs'
   usePageTitle(`${pageLabel} · AgentOBS Docs · Spanforge`)
+
+  const resolveDocLink = (href) => {
+    if (!href || !currentDoc?.source) return href
+    if (href.startsWith('#')) return href
+    if (href.startsWith('http://') || href.startsWith('https://') || href.startsWith('//')) return href
+    if (href.startsWith('mailto:') || href.startsWith('tel:')) return href
+
+    const [rawPath, hash] = href.split('#')
+    const hashSuffix = hash ? `#${hash}` : ''
+
+    if (!rawPath) return hashSuffix || href
+
+    let normalized = rawPath.startsWith('/')
+      ? normalizePath(rawPath)
+      : resolveRelativePath(currentDoc.source, rawPath)
+
+    if (normalized.startsWith('docs/')) {
+      normalized = normalized.slice(5)
+    }
+
+    if (normalized.endsWith('RFC-0001-AGENTOBS.md')) {
+      return '/standard/spec'
+    }
+
+    const page = SOURCE_TO_PAGE[normalized]
+    if (page) {
+      return `/sdk/docs/${page}${hashSuffix}`
+    }
+
+    if (normalized.endsWith('.md') || normalized.endsWith('.json')) {
+      return `${AGENTOBS_GITHUB_BASE}/${normalized}${hashSuffix}`
+    }
+
+    return href
+  }
 
   if (!content) {
     return <Navigate to="/sdk/docs/quickstart" replace />
@@ -211,7 +278,7 @@ export default function AgentObsDocs() {
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Nav />
       <DocLayout basePath="/sdk/docs" sidebar={SIDEBAR}>
-        <MarkdownRenderer content={content} />
+        <MarkdownRenderer content={content} resolveLink={resolveDocLink} />
       </DocLayout>
       <Footer />
     </div>
