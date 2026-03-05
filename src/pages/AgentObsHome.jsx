@@ -164,7 +164,7 @@ with tracium.span("call-llm") as span:
             Profiles are cumulative — each higher profile includes all requirements of the profiles below it.
             Adopt only what you need today.
           </p>
-          <div className={styles.providerGrid} style={{ gridTemplateColumns: 'repeat(4, 1fr)' }}>
+          <div className={styles.profilesGrid}>
             {profiles.map(p => (
               <div key={p.name} className={styles.providerCard} style={{ padding: '1.5rem', borderTop: `3px solid ${p.color}` }}>
                 <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.68rem', fontWeight: 700, color: p.color, background: `${p.color}18`, border: `1px solid ${p.color}44`, padding: '0.2rem 0.5rem', borderRadius: 4, display: 'inline-block', marginBottom: '0.6rem' }}>{p.label}</div>
@@ -211,6 +211,7 @@ with tracium.span("call-llm") as span:
             Every event carries a typed payload whose shape is defined by its namespace.
             All standard event types follow <code>llm.&lt;namespace&gt;.&lt;entity&gt;.&lt;action&gt;</code>.
           </p>
+          <div className={styles.tableWrapper}>
           <table className={styles.nsTable}>
             <thead>
               <tr>
@@ -229,6 +230,7 @@ with tracium.span("call-llm") as span:
               ))}
             </tbody>
           </table>
+          </div>
         </div>
       </section>
 

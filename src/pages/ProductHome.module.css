@@ -305,6 +305,13 @@
   gap: 1rem;
 }
 
+/* ── Profiles grid (4-col) ── */
+.profilesGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
 .providerCard {
   background: #fff;
   border: 1px solid var(--border);
@@ -432,12 +439,20 @@
   line-height: 1.5;
 }
 
+/* ── Table scroll wrapper ── */
+.tableWrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 2rem;
+  border-radius: var(--radius);
+}
+
 /* ── Namespace table ── */
 .nsTable {
   width: 100%;
+  min-width: 540px;
   border-collapse: collapse;
   font-size: 0.875rem;
-  margin-top: 2rem;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
@@ -490,6 +505,9 @@
   .providerGrid {
     grid-template-columns: repeat(2, 1fr);
   }
+  .profilesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
   .docGrid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -508,6 +526,8 @@
   .heroStats {
     flex-wrap: wrap;
     padding: 0.6rem 1rem;
+    max-width: 100%;
+    width: 100%;
   }
   .stat {
     padding: 0.4rem 0.8rem;
@@ -536,6 +556,9 @@
   }
   .providerGrid {
     grid-template-columns: 1fr 1fr;
+  }
+  .profilesGrid {
+    grid-template-columns: 1fr;
   }
   .docGrid {
     grid-template-columns: 1fr;
