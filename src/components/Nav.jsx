@@ -15,6 +15,9 @@ export default function Nav() {
   const isSdk = location.pathname.startsWith('/sdk')
   const isTools = location.pathname.startsWith('/tools')
   const isAgentObsDebug = location.pathname.startsWith('/agentobs-debug')
+  const isHome = location.pathname === '/'
+
+  const homeSectionHref = (sectionId) => (isHome ? `#${sectionId}` : `/#${sectionId}`)
 
   const closeMenu = () => setMenuOpen(false)
 
@@ -45,7 +48,7 @@ export default function Nav() {
           <ul className={styles.links}>
             {!isLlmDiff && !isStandard && !isTutorials && !isSdk && !isTools && !isAgentObsDebug && (
               <>
-                <li><a href="#mission">Why Here</a></li>
+                <li><a href={homeSectionHref('mission')}>Why Here</a></li>
                 <li><Link to="/standard">The Standard</Link></li>
                 <li><Link to="/sdk">The SDK</Link></li>
                 <li className={styles.dropdown}>
@@ -54,8 +57,9 @@ export default function Nav() {
                     <Link to="/tools/core">Core</Link>
                   </div>
                 </li>
-                <li><a href="#learn">Education</a></li>
-                <li><a href="#community">Community</a></li>
+                <li><a href={homeSectionHref('learn')}>Education</a></li>
+                <li><Link to="/security">Trust</Link></li>
+                <li><a href={homeSectionHref('community')}>Community</a></li>
               </>
             )}
             {(isLlmDiff || isStandard || isTutorials || isSdk || isTools || isAgentObsDebug) && (
@@ -94,7 +98,6 @@ export default function Nav() {
                 <li><Link to="/sdk">Overview</Link></li>
                 <li><Link to="/sdk/docs/quickstart">Quickstart</Link></li>
                 <li><Link to="/sdk/docs/api-index">API Reference</Link></li>
-                <li><Link to="/sdk/docs/ns-index">Namespaces</Link></li>
               </>
             )}
             {isAgentObsDebug && (
@@ -141,13 +144,14 @@ export default function Nav() {
         <div className={styles.mobileMenu}>
           {!isLlmDiff && !isStandard && !isTutorials && !isSdk && !isTools && !isAgentObsDebug && (
             <>
-              <a href="#mission" onClick={closeMenu}>Why Here</a>
+              <a href={homeSectionHref('mission')} onClick={closeMenu}>Why Here</a>
               <Link to="/standard" onClick={closeMenu}>The Standard</Link>
               <Link to="/sdk" onClick={closeMenu}>The SDK</Link>
               <Link to="/tools/core" onClick={closeMenu}>The Tools</Link>
               <Link to="/tools/core" onClick={closeMenu} className={styles.mobileSubLink}>Core</Link>
-              <a href="#learn" onClick={closeMenu}>Education</a>
-              <a href="#community" onClick={closeMenu}>Community</a>
+              <a href={homeSectionHref('learn')} onClick={closeMenu}>Education</a>
+              <Link to="/security" onClick={closeMenu}>Trust</Link>
+              <a href={homeSectionHref('community')} onClick={closeMenu}>Community</a>
             </>
           )}
           {(isLlmDiff || isStandard || isTutorials || isSdk || isTools || isAgentObsDebug) && (
@@ -184,7 +188,6 @@ export default function Nav() {
               <Link to="/sdk" onClick={closeMenu}>Overview</Link>
               <Link to="/sdk/docs/quickstart" onClick={closeMenu}>Quickstart</Link>
               <Link to="/sdk/docs/api-index" onClick={closeMenu}>API Reference</Link>
-              <Link to="/sdk/docs/ns-index" onClick={closeMenu}>Namespaces</Link>
             </>
           )}
           {isAgentObsDebug && (

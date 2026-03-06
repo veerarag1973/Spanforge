@@ -143,6 +143,18 @@ img {
   background: var(--surface);
 }
 
+:focus-visible {
+  outline: 2px solid var(--accent2);
+  outline-offset: 2px;
+}
+
+.btn:focus-visible,
+a:focus-visible,
+button:focus-visible {
+  box-shadow: 0 0 0 3px rgba(61,90,241,.2);
+  border-radius: var(--radius-sm);
+}
+
 /* ── Badges ── */
 .badge {
   display: inline-flex;

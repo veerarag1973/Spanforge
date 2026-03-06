@@ -107,7 +107,7 @@ export default function AgentObsDebugHome() {
       <section className={styles.section}>
         <div className="container">
           <p className="section-label">Overview</p>
-          <h2 className={styles.sectionTitle}>What is AgentOBSDebug?</h2>
+          <h2 className={styles.sectionTitle}>Understand failures from trace to root cause</h2>
           <div className={styles.providerGrid}>
             <article className={styles.providerCard}>
               <div className={styles.providerName}>What It Is</div>
@@ -144,7 +144,7 @@ export default function AgentObsDebugHome() {
       <section className={styles.sectionAlt}>
         <div className="container">
           <p className="section-label">Quick Start</p>
-          <h2 className={styles.sectionTitle}>Debug your first trace in seconds</h2>
+          <h2 className={styles.sectionTitle}>Replay and inspect your first trace in minutes</h2>
           <div className={styles.codeBlock}>
             <div className={styles.codeHeader}>
               <span className={styles.codeTitle}>python</span>
@@ -177,7 +177,7 @@ aod.diff_traces(trace_a, trace_b, stream=stream)  # compare two traces`}</code><
       <section className={styles.section}>
         <div className="container">
           <p className="section-label">Capabilities</p>
-          <h2 className={styles.sectionTitle}>Inspect traces from every angle</h2>
+          <h2 className={styles.sectionTitle}>Debug traces with decision-grade visibility</h2>
           <div className={styles.featGrid}>
             {features.map(f => (
               <div key={f.title} className={styles.featCard}>
@@ -196,7 +196,7 @@ aod.diff_traces(trace_a, trace_b, stream=stream)  # compare two traces`}</code><
       <section className={styles.sectionAlt}>
         <div className="container">
           <p className="section-label">10 Views</p>
-          <h2 className={styles.sectionTitle}>One command per view — CLI and Python API</h2>
+          <h2 className={styles.sectionTitle}>Use one command per debugging view</h2>
           <div className={styles.moduleGrid} style={{ marginTop: '2rem' }}>
             <div className={`${styles.moduleRow} ${styles.moduleRowHeader}`}>
               <div className={styles.moduleCell}>Command / function</div>
@@ -218,7 +218,7 @@ aod.diff_traces(trace_a, trace_b, stream=stream)  # compare two traces`}</code><
       <section className={styles.section}>
         <div className="container">
           <p className="section-label">Documentation</p>
-          <h2 className={styles.sectionTitle}>Everything you need</h2>
+          <h2 className={styles.sectionTitle}>Go from first replay to deep API usage</h2>
           <div className={styles.docGrid}>
             {[
               { path: 'overview', label: 'Overview', desc: 'Installation, quickstart snippets, and full public API summary' },

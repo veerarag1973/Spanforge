@@ -71,8 +71,8 @@ export default function ToolsCoreHome() {
           <p className={styles.kicker}>The Tools / Core</p>
           <h1 className={styles.title}>Core Tooling for Observable AI Systems</h1>
           <p className={styles.sub}>
-            Production-ready tools that plug into the Spanforge ecosystem. Pick one and go deep,
-            or compose both in your workflow.
+            Production-ready tools for traceability, evaluation, and debugging. Adopt one quickly,
+            or compose multiple tools into a single workflow without integration debt.
           </p>
         </div>
       </header>

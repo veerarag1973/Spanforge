@@ -1,44 +1,56 @@
+import { lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import ScrollToTop from './components/ScrollToTop.jsx'
 import BackToTop from './components/BackToTop.jsx'
-import Home from './pages/Home.jsx'
-import LlmDiffHome from './pages/LlmDiffHome.jsx'
-import LlmDiffDocs from './pages/LlmDiffDocs.jsx'
-import StandardHome from './pages/StandardHome.jsx'
-import StandardSpec from './pages/StandardSpec.jsx'
-import Feedback from './pages/Feedback.jsx'
-import TutorialsDocs from './pages/TutorialsDocs.jsx'
-import AgentObsHome from './pages/AgentObsHome.jsx'
-import AgentObsDocs from './pages/AgentObsDocs.jsx'
-import ToolsCoreHome from './pages/ToolsCoreHome.jsx'
-import AgentObsDebugHome from './pages/AgentObsDebugHome.jsx'
-import AgentObsDebugDocs from './pages/AgentObsDebugDocs.jsx'
-import NotFound from './pages/NotFound.jsx'
+
+const Home = lazy(() => import('./pages/Home.jsx'))
+const LlmDiffHome = lazy(() => import('./pages/LlmDiffHome.jsx'))
+const LlmDiffDocs = lazy(() => import('./pages/LlmDiffDocs.jsx'))
+const StandardHome = lazy(() => import('./pages/StandardHome.jsx'))
+const StandardSpec = lazy(() => import('./pages/StandardSpec.jsx'))
+const Feedback = lazy(() => import('./pages/Feedback.jsx'))
+const TutorialsDocs = lazy(() => import('./pages/TutorialsDocs.jsx'))
+const AgentObsHome = lazy(() => import('./pages/AgentObsHome.jsx'))
+const AgentObsDocs = lazy(() => import('./pages/AgentObsDocs.jsx'))
+const ToolsCoreHome = lazy(() => import('./pages/ToolsCoreHome.jsx'))
+const AgentObsDebugHome = lazy(() => import('./pages/AgentObsDebugHome.jsx'))
+const AgentObsDebugDocs = lazy(() => import('./pages/AgentObsDebugDocs.jsx'))
+const Security = lazy(() => import('./pages/Security.jsx'))
+const Reliability = lazy(() => import('./pages/Reliability.jsx'))
+const Compatibility = lazy(() => import('./pages/Compatibility.jsx'))
+const Roadmap = lazy(() => import('./pages/Roadmap.jsx'))
+const NotFound = lazy(() => import('./pages/NotFound.jsx'))
 
 function AppRoutes() {
   const location = useLocation()
   return (
     <div key={location.pathname} className="route-outlet">
-      <Routes location={location}>
-        <Route path="/" element={<Home />} />
-        <Route path="/llm-diff" element={<LlmDiffHome />} />
-        <Route path="/llm-diff/docs" element={<LlmDiffDocs />} />
-        <Route path="/llm-diff/docs/*" element={<LlmDiffDocs />} />
-        <Route path="/standard" element={<StandardHome />} />
-        <Route path="/standard/spec" element={<StandardSpec />} />
-        <Route path="/standard/feedback" element={<Feedback />} />
-        <Route path="/learn" element={<TutorialsDocs />} />
-        <Route path="/learn/*" element={<TutorialsDocs />} />
-        <Route path="/tools" element={<ToolsCoreHome />} />
-        <Route path="/tools/core" element={<ToolsCoreHome />} />
-        <Route path="/sdk" element={<AgentObsHome />} />
-        <Route path="/sdk/docs" element={<AgentObsDocs />} />
-        <Route path="/sdk/docs/*" element={<AgentObsDocs />} />
-        <Route path="/agentobs-debug" element={<AgentObsDebugHome />} />
-        <Route path="/agentobs-debug/docs" element={<AgentObsDebugDocs />} />
-        <Route path="/agentobs-debug/docs/*" element={<AgentObsDebugDocs />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <Suspense fallback={null}>
+        <Routes location={location}>
+          <Route path="/" element={<Home />} />
+          <Route path="/llm-diff" element={<LlmDiffHome />} />
+          <Route path="/llm-diff/docs" element={<LlmDiffDocs />} />
+          <Route path="/llm-diff/docs/*" element={<LlmDiffDocs />} />
+          <Route path="/standard" element={<StandardHome />} />
+          <Route path="/standard/spec" element={<StandardSpec />} />
+          <Route path="/standard/feedback" element={<Feedback />} />
+          <Route path="/learn" element={<TutorialsDocs />} />
+          <Route path="/learn/*" element={<TutorialsDocs />} />
+          <Route path="/tools" element={<ToolsCoreHome />} />
+          <Route path="/tools/core" element={<ToolsCoreHome />} />
+          <Route path="/sdk" element={<AgentObsHome />} />
+          <Route path="/sdk/docs" element={<AgentObsDocs />} />
+          <Route path="/sdk/docs/*" element={<AgentObsDocs />} />
+          <Route path="/agentobs-debug" element={<AgentObsDebugHome />} />
+          <Route path="/agentobs-debug/docs" element={<AgentObsDebugDocs />} />
+          <Route path="/agentobs-debug/docs/*" element={<AgentObsDebugDocs />} />
+          <Route path="/security" element={<Security />} />
+          <Route path="/reliability" element={<Reliability />} />
+          <Route path="/compatibility" element={<Compatibility />} />
+          <Route path="/roadmap" element={<Roadmap />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Suspense>
     </div>
   )
 }

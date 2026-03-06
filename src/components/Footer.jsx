@@ -43,6 +43,16 @@ export default function Footer() {
               <li><a href="https://pypi.org/project/llm-diff/" target="_blank" rel="noopener">PyPI</a></li>
             </ul>
           </div>
+
+          <div className={styles.col}>
+            <h4 className={styles.colTitle}>Trust</h4>
+            <ul>
+              <li><Link to="/security">Security</Link></li>
+              <li><Link to="/reliability">Reliability</Link></li>
+              <li><Link to="/compatibility">Compatibility Policy</Link></li>
+              <li><Link to="/roadmap">Roadmap</Link></li>
+            </ul>
+          </div>
         </div>
 
         <hr className={styles.divider} />

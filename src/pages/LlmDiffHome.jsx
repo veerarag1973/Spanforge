@@ -141,7 +141,7 @@ export default function LlmDiffHome() {
       <section className={styles.section}>
         <div className="container">
           <p className="section-label">Quick Start</p>
-          <h2 className={styles.sectionTitle}>Your first comparison in seconds</h2>
+          <h2 className={styles.sectionTitle}>Run your first model comparison in seconds</h2>
 
           <div className={styles.codeBlock}>
             <div className={styles.codeHeader}>
@@ -171,7 +171,7 @@ llm-diff --batch prompts.yml -a gpt-4o -b gpt-4o-mini --semantic --fail-under 0.
       <section className={styles.sectionAlt}>
         <div className="container">
           <p className="section-label">Features</p>
-          <h2 className={styles.sectionTitle}>Everything you need to evaluate LLMs</h2>
+          <h2 className={styles.sectionTitle}>Ship safer model and prompt changes</h2>
           <div className={styles.featGrid}>
             {features.map(f => (
               <div key={f.title} className={styles.featCard}>
@@ -190,7 +190,7 @@ llm-diff --batch prompts.yml -a gpt-4o -b gpt-4o-mini --semantic --fail-under 0.
       <section className={styles.section}>
         <div className="container">
           <p className="section-label">Providers</p>
-          <h2 className={styles.sectionTitle}>Works with every major LLM provider</h2>
+          <h2 className={styles.sectionTitle}>Connect to major providers and local runtimes</h2>
           <p style={{ color: 'var(--muted)', marginBottom: '2rem', maxWidth: 560 }}>
             llm-diff connects to any provider that exposes an OpenAI-compatible API,
             plus local models via Ollama and LM Studio.
@@ -212,7 +212,7 @@ llm-diff --batch prompts.yml -a gpt-4o -b gpt-4o-mini --semantic --fail-under 0.
       <section className={styles.sectionAlt}>
         <div className="container">
           <p className="section-label">Documentation</p>
-          <h2 className={styles.sectionTitle}>Everything you need</h2>
+          <h2 className={styles.sectionTitle}>Move from setup to CI in one docs path</h2>
           <div className={styles.docGrid}>
             {[
               { path: 'getting-started', label: 'Getting Started', desc: 'Installation, API keys, first diff' },

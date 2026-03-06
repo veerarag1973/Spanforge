@@ -107,7 +107,7 @@ export default function AgentObsHome() {
       <section className={styles.section}>
         <div className="container">
           <p className="section-label">What is AgentOBS?</p>
-          <h2 className={styles.sectionTitle}>Think of it as a universal receipt for your AI app</h2>
+          <h2 className={styles.sectionTitle}>Understand the standard in one page</h2>
           <p style={{ color: 'var(--muted)', maxWidth: 720, marginBottom: '2rem', lineHeight: 1.8 }}>
             <strong style={{ color: 'var(--text)' }}>AgentOBS</strong> (<code>tracium</code>) is the reference implementation of{' '}
             <Link to="/standard" style={{ color: 'var(--accent)', fontWeight: 600 }}>RFC-0001 AGENTOBS</Link> — the open event-schema standard for
@@ -134,7 +134,7 @@ export default function AgentObsHome() {
       <section className={styles.sectionAlt}>
         <div className="container">
           <p className="section-label">Quick Start</p>
-          <h2 className={styles.sectionTitle}>Trace your first LLM call in seconds</h2>
+          <h2 className={styles.sectionTitle}>Emit your first compliant span event in minutes</h2>
           <div className={styles.codeBlock}>
             <div className={styles.codeHeader}>
               <span className={styles.codeTitle}>python</span>
@@ -172,7 +172,7 @@ print(event.to_json())`}</code></pre>
       <section className={styles.section}>
         <div className="container">
           <p className="section-label">Conformance Profiles</p>
-          <h2 className={styles.sectionTitle}>Four profiles for incremental adoption</h2>
+          <h2 className={styles.sectionTitle}>Adopt by profile, scale by requirement</h2>
           <p style={{ color: 'var(--muted)', maxWidth: 620, marginBottom: '2rem', lineHeight: 1.75 }}>
             Profiles are cumulative — each higher profile includes all requirements of the profiles below it.
             Adopt only what you need today.
@@ -195,7 +195,7 @@ print(event.to_json())`}</code></pre>
       <section className={styles.sectionAlt}>
         <div className="container">
           <p className="section-label">Modules</p>
-          <h2 className={styles.sectionTitle}>What's inside the box</h2>
+          <h2 className={styles.sectionTitle}>Use focused modules without platform lock-in</h2>
           <div className={styles.moduleGrid} style={{ marginTop: '2rem' }}>
             <div className={`${styles.moduleRow} ${styles.moduleRowHeader}`}>
               <div className={styles.moduleCell}>Module</div>
@@ -219,7 +219,7 @@ print(event.to_json())`}</code></pre>
       <section className={styles.section}>
         <div className="container">
           <p className="section-label">Event Namespaces</p>
-          <h2 className={styles.sectionTitle}>11 built-in namespaces cover the full AI lifecycle</h2>
+          <h2 className={styles.sectionTitle}>Cover the full AI lifecycle with typed payloads</h2>
           <p style={{ color: 'var(--muted)', maxWidth: 620, marginBottom: '2rem' }}>
             Every event carries a typed payload whose shape is defined by its namespace.
             All standard event types follow <code>llm.&lt;namespace&gt;.&lt;entity&gt;.&lt;action&gt;</code>.
@@ -253,7 +253,7 @@ print(event.to_json())`}</code></pre>
       <section className={styles.sectionAlt}>
         <div className="container">
           <p className="section-label">Documentation</p>
-          <h2 className={styles.sectionTitle}>Everything you need</h2>
+          <h2 className={styles.sectionTitle}>Go from quickstart to governance without context switching</h2>
           <div className={styles.docGrid}>
             {[
               { path: 'quickstart', label: 'Quickstart', desc: 'Create your first event, sign a chain, and export — in 5 minutes' },
