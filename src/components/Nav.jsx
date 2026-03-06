@@ -107,16 +107,18 @@ export default function Nav() {
                 <li><Link to="/agentobs-debug/docs/tutorial">Tutorial</Link></li>
               </>
             )}
-            <li>
-              <a
-                href="https://github.com/veerarag1973"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.ghLink}
-              >
-                GitHub ↗
-              </a>
-            </li>
+            {!isHome && (
+              <li>
+                <a
+                  href="https://github.com/veerarag1973"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.ghLink}
+                >
+                  GitHub ↗
+                </a>
+              </li>
+            )}
           </ul>
 
           {(isLlmDiff || isStandard || isTutorials || isSdk || isTools || isAgentObsDebug) && (
@@ -197,14 +199,16 @@ export default function Nav() {
               <Link to="/agentobs-debug/docs/tutorial" onClick={closeMenu}>Tutorial</Link>
             </>
           )}
-          <a
-            href="https://github.com/veerarag1973"
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={closeMenu}
-          >
-            GitHub ↗
-          </a>
+          {!isHome && (
+            <a
+              href="https://github.com/veerarag1973"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={closeMenu}
+            >
+              GitHub ↗
+            </a>
+          )}
         </div>
       )}
     </div>
