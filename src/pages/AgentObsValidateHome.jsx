@@ -278,7 +278,6 @@ result = validate_stream(iter_events("events.jsonl"), ctx)`}</code></pre>
               { path: 'errors',       label: 'Error Codes',    desc: 'Every error code, the field it targets, example bad values, and how to fix them' },
               { path: 'ci',           label: 'CI Integration', desc: 'Drop-in configuration for GitHub Actions, GitLab CI, CircleCI and JSON output parsing' },
               { path: 'performance',  label: 'Performance',    desc: 'Benchmark results, throughput targets, memory model, and how to reproduce' },
-              { path: 'roadmap',      label: 'Roadmap',        desc: 'Shipped features — OTel mode, schema version pinning, HMAC signing, schema export' },
             ].map(d => (
               <Link key={d.path} to={`/agentobs-validate/docs/${d.path}`} className={styles.docCard}>
                 <div className={styles.docCardLabel}>{d.label} →</div>

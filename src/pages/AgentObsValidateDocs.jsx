@@ -11,7 +11,6 @@ import sdkMd       from '../../AgentOBSValidate/docs/sdk.md?raw'
 import errorsMd    from '../../AgentOBSValidate/docs/errors.md?raw'
 import ciMd        from '../../AgentOBSValidate/docs/ci.md?raw'
 import performanceMd from '../../AgentOBSValidate/docs/performance.md?raw'
-import roadmapMd   from '../../AgentOBSValidate/docs/roadmap.md?raw'
 
 const DOC_MAP = {
   'overview':    { content: readmeMd,       source: 'README.md' },
@@ -20,7 +19,6 @@ const DOC_MAP = {
   'errors':      { content: errorsMd,       source: 'docs/errors.md' },
   'ci':          { content: ciMd,           source: 'docs/ci.md' },
   'performance': { content: performanceMd,  source: 'docs/performance.md' },
-  'roadmap':     { content: roadmapMd,      source: 'docs/roadmap.md' },
 }
 
 const SOURCE_TO_PAGE = {
@@ -30,7 +28,6 @@ const SOURCE_TO_PAGE = {
   'docs/errors.md':         'errors',
   'docs/ci.md':             'ci',
   'docs/performance.md':    'performance',
-  'docs/roadmap.md':        'roadmap',
 }
 
 function normalizePath(path) {
@@ -76,7 +73,6 @@ const SIDEBAR = [
     title: 'Meta',
     items: [
       { path: 'performance', label: 'Performance' },
-      { path: 'roadmap',     label: 'Roadmap' },
     ],
   },
 ]

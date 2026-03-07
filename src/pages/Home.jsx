@@ -8,8 +8,8 @@ import styles from './Home.module.css'
 const proofBadges = [
   {
     alt: 'AgentOBS GitHub stars',
-    href: 'https://github.com/veerarag1973/agentobs',
-    src: 'https://img.shields.io/github/stars/veerarag1973/agentobs?style=flat&label=agentobs%20stars&color=0d9f75',
+    href: 'https://github.com/veerarag1973/AgentOBS',
+    src: 'https://img.shields.io/github/stars/veerarag1973/AgentOBS?style=flat&label=agentobs%20stars&color=0d9f75',
   },
   {
     alt: 'AgentOBS PyPI version',
