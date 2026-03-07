@@ -15,6 +15,8 @@ const AgentObsDocs = lazy(() => import('./pages/AgentObsDocs.jsx'))
 const ToolsCoreHome = lazy(() => import('./pages/ToolsCoreHome.jsx'))
 const AgentObsDebugHome = lazy(() => import('./pages/AgentObsDebugHome.jsx'))
 const AgentObsDebugDocs = lazy(() => import('./pages/AgentObsDebugDocs.jsx'))
+const AgentObsValidateHome = lazy(() => import('./pages/AgentObsValidateHome.jsx'))
+const AgentObsValidateDocs = lazy(() => import('./pages/AgentObsValidateDocs.jsx'))
 const Security = lazy(() => import('./pages/Security.jsx'))
 const Reliability = lazy(() => import('./pages/Reliability.jsx'))
 const Compatibility = lazy(() => import('./pages/Compatibility.jsx'))
@@ -44,6 +46,9 @@ function AppRoutes() {
           <Route path="/agentobs-debug" element={<AgentObsDebugHome />} />
           <Route path="/agentobs-debug/docs" element={<AgentObsDebugDocs />} />
           <Route path="/agentobs-debug/docs/*" element={<AgentObsDebugDocs />} />
+          <Route path="/agentobs-validate" element={<AgentObsValidateHome />} />
+          <Route path="/agentobs-validate/docs" element={<AgentObsValidateDocs />} />
+          <Route path="/agentobs-validate/docs/*" element={<AgentObsValidateDocs />} />
           <Route path="/security" element={<Security />} />
           <Route path="/reliability" element={<Reliability />} />
           <Route path="/compatibility" element={<Compatibility />} />

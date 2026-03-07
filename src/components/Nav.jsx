@@ -15,6 +15,7 @@ export default function Nav() {
   const isSdk = location.pathname.startsWith('/sdk')
   const isTools = location.pathname.startsWith('/tools')
   const isAgentObsDebug = location.pathname.startsWith('/agentobs-debug')
+  const isAgentObsValidate = location.pathname.startsWith('/agentobs-validate')
   const isHome = location.pathname === '/'
 
   const homeSectionHref = (sectionId) => (isHome ? `#${sectionId}` : `/#${sectionId}`)
@@ -46,7 +47,7 @@ export default function Nav() {
           </Link>
 
           <ul className={styles.links}>
-            {!isLlmDiff && !isStandard && !isTutorials && !isSdk && !isTools && !isAgentObsDebug && (
+            {!isLlmDiff && !isStandard && !isTutorials && !isSdk && !isTools && !isAgentObsDebug && !isAgentObsValidate && (
               <>
                 <li><a href={homeSectionHref('mission')}>Why Here</a></li>
                 <li><Link to="/standard">The Standard</Link></li>
@@ -62,7 +63,7 @@ export default function Nav() {
                 <li><a href={homeSectionHref('community')}>Community</a></li>
               </>
             )}
-            {(isLlmDiff || isStandard || isTutorials || isSdk || isTools || isAgentObsDebug) && (
+            {(isLlmDiff || isStandard || isTutorials || isSdk || isTools || isAgentObsDebug || isAgentObsValidate) && (
               <li className={styles.dropdown}>
                 <button type="button" className={styles.dropdownToggle}>The Tools</button>
                 <div className={styles.submenu}>
@@ -74,6 +75,7 @@ export default function Nav() {
               <>
                 <li><Link to="/llm-diff">llm-diff</Link></li>
                 <li><Link to="/agentobs-debug">AgentOBSDebug</Link></li>
+                <li><Link to="/agentobs-validate">agentobs-validate</Link></li>
               </>
             )}
             {isStandard && (
@@ -107,6 +109,13 @@ export default function Nav() {
                 <li><Link to="/agentobs-debug/docs/tutorial">Tutorial</Link></li>
               </>
             )}
+            {isAgentObsValidate && (
+              <>
+                <li><Link to="/agentobs-validate">Overview</Link></li>
+                <li><Link to="/agentobs-validate/docs/sdk">SDK Reference</Link></li>
+                <li><Link to="/agentobs-validate/docs/tutorial">Tutorial</Link></li>
+              </>
+            )}
             {!isHome && (
               <li>
                 <a
@@ -121,7 +130,7 @@ export default function Nav() {
             )}
           </ul>
 
-          {(isLlmDiff || isStandard || isTutorials || isSdk || isTools || isAgentObsDebug) && (
+          {(isLlmDiff || isStandard || isTutorials || isSdk || isTools || isAgentObsDebug || isAgentObsValidate) && (
             <div className={styles.productBadge}>
               {isLlmDiff && <span className={styles.productName}>llm-diff</span>}
               {isStandard && <span className={styles.productName}>The Standard</span>}
@@ -129,6 +138,7 @@ export default function Nav() {
               {isSdk && <span className={styles.productName}>AgentOBS</span>}
               {isTools && <span className={styles.productName}>The Tools</span>}
               {isAgentObsDebug && <span className={styles.productName}>AgentOBSDebug</span>}
+              {isAgentObsValidate && <span className={styles.productName}>agentobs-validate</span>}
             </div>
           )}
 
@@ -144,7 +154,7 @@ export default function Nav() {
 
       {menuOpen && (
         <div className={styles.mobileMenu}>
-          {!isLlmDiff && !isStandard && !isTutorials && !isSdk && !isTools && !isAgentObsDebug && (
+          {!isLlmDiff && !isStandard && !isTutorials && !isSdk && !isTools && !isAgentObsDebug && !isAgentObsValidate && (
             <>
               <a href={homeSectionHref('mission')} onClick={closeMenu}>Why Here</a>
               <Link to="/standard" onClick={closeMenu}>The Standard</Link>
@@ -156,7 +166,7 @@ export default function Nav() {
               <a href={homeSectionHref('community')} onClick={closeMenu}>Community</a>
             </>
           )}
-          {(isLlmDiff || isStandard || isTutorials || isSdk || isTools || isAgentObsDebug) && (
+          {(isLlmDiff || isStandard || isTutorials || isSdk || isTools || isAgentObsDebug || isAgentObsValidate) && (
             <>
               <Link to="/tools/core" onClick={closeMenu}>The Tools</Link>
               <Link to="/tools/core" onClick={closeMenu} className={styles.mobileSubLink}>Core</Link>
@@ -166,6 +176,7 @@ export default function Nav() {
             <>
               <Link to="/llm-diff" onClick={closeMenu}>llm-diff</Link>
               <Link to="/agentobs-debug" onClick={closeMenu}>AgentOBSDebug</Link>
+              <Link to="/agentobs-validate" onClick={closeMenu}>agentobs-validate</Link>
             </>
           )}
           {isStandard && (
@@ -197,6 +208,13 @@ export default function Nav() {
               <Link to="/agentobs-debug" onClick={closeMenu}>Overview</Link>
               <Link to="/agentobs-debug/docs/python-api" onClick={closeMenu}>Python API</Link>
               <Link to="/agentobs-debug/docs/tutorial" onClick={closeMenu}>Tutorial</Link>
+            </>
+          )}
+          {isAgentObsValidate && (
+            <>
+              <Link to="/agentobs-validate" onClick={closeMenu}>Overview</Link>
+              <Link to="/agentobs-validate/docs/sdk" onClick={closeMenu}>SDK Reference</Link>
+              <Link to="/agentobs-validate/docs/tutorial" onClick={closeMenu}>Tutorial</Link>
             </>
           )}
           {!isHome && (

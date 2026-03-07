@@ -6,6 +6,7 @@ import styles from './ToolsCoreHome.module.css'
 
 import llmDiffReadme from '../../llmdiff/README.md?raw'
 import agentObsDebugReadme from '../../AgentOBSDebug/README.md?raw'
+import agentObsValidateReadme from '../../AgentOBSValidate/README.md?raw'
 
 function markdownToText(markdown) {
   return markdown
@@ -55,6 +56,16 @@ const tools = [
     ),
     to: '/agentobs-debug',
     docsTo: '/agentobs-debug/docs/python-api',
+  },
+  {
+    name: 'agentobs-validate',
+    kind: 'Core Tool',
+    blurb: extractBlurb(
+      agentObsValidateReadme,
+      'Reference validation CLI and Python SDK for the AgentOBS event standard.'
+    ),
+    to: '/agentobs-validate',
+    docsTo: '/agentobs-validate/docs/tutorial',
   },
 ]
 
