@@ -29,7 +29,7 @@ export default function GABanner() {
       <span className={styles.dot} aria-hidden="true" />
       {launched ? (
         <span>
-          <strong>SpanForge is now Generally Available</strong> — install v2.0.14 and ship compliance-ready AI today.
+          <strong>SpanForge is now Generally Available</strong> — install v1.0.3 and ship compliance-ready AI today.
         </span>
       ) : (
         <span>

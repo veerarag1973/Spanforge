@@ -4,6 +4,17 @@ This page summarizes the Phase 0 through Phase 7 GA spine for the May 2, 2026 re
 
 ---
 
+## v1.0.3 — General Availability Release (2026-05-10)
+
+**License change to MIT + version bump**
+
+- Version bumped from `1.0.2` → `1.0.3` in `pyproject.toml`.
+- License changed from PolyForm Noncommercial 1.0.0 to the **MIT License** — spanforge is now free for all use, including commercial.
+- No functional code changes — metadata and documentation only.
+- **Tests:** 7 049 passed, 7 skipped · **Coverage:** 91%
+
+---
+
 ## v1.0.1 — Production Hardening (2026-05-02 … 2026-05-08)
 
 **Phase 1B/1C: Explain model types + full explain() API + @governed, Scope circuit breaker, Validate enforcement modes, RBAC standard roles + JWT/YAML, Training Data Compliance Scanner**
