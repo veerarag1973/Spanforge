@@ -273,11 +273,10 @@ export default function Home() {
             <div className={styles.founderQuoteMark} aria-hidden="true">&ldquo;</div>
             <div className={styles.founderContent}>
               <p className={styles.founderMission}>Our mission: make AI compliance infrastructure as automatic as security scanning.</p>
-              <p className={styles.founderMission}>Our mission: make AI compliance infrastructure as automatic as security scanning.</p>
               <p className={styles.founderStatement}>
                 After years leading enterprise AI programs, I kept seeing the same gap: teams built capable AI but couldn&rsquo;t prove it was safe, compliant, or auditable. SpanForge closes that gap &mdash; at the SDK layer, before production.
               </p>
-              <p className={styles.founderAttrib}>Founder, SpanForge (est. 2024) &middot; 10+ years enterprise AI program leadership</p>
+              <p className={styles.founderAttrib}>Founder, SpanForge (est. 2024) &middot; 5+ years enterprise AI program leadership</p>
             </div>
           </div>
         </div>
