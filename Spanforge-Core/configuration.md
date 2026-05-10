@@ -4,25 +4,11 @@ spanforge can be configured at runtime via **environment variables**, a
 **`spanforge.toml` file** (loaded by `spanforge init`), or the
 **Python API** (`spanforge.configure(...)`).
 
-## Try in 30 seconds
+Use `spanforge.interpolate_env(template)` to expand `${VAR}` placeholders
+in configuration strings at runtime.
 
-The most common configuration — export traces to console, then swap to a durable backend when ready:
-
-```bash
-pip install spanforge
-
-# Quickest setup — print traces to console
-SPANFORGE_EXPORTER=console SPANFORGE_SERVICE_NAME=my-agent python my_agent.py
-
-# Production setup — export to OTLP collector
-SPANFORGE_EXPORTER=otlp SPANFORGE_ENDPOINT=http://otel-collector:4318 python my_agent.py
-
-# Or configure in code
-import spanforge
-spanforge.configure(exporter="jsonl", service_name="my-agent", env="production")
-```
-
-See the full settings reference below.
+Environment variables always take the highest precedence and override values
+set programmatically or in the TOML file.
 
 ---
 
@@ -89,6 +75,67 @@ spanforge.configure(exporter="jsonl", endpoint="./spanforge-events.jsonl")
 ```
 
 One JSON object per line — easy to `grep`, `jq`, or forward to a log aggregator.
+
+---
+
+## `~/.spanforge/config.yaml` — local config file *(CARD 1D-1)*
+
+`spanforge config init` generates a YAML config file at `~/.spanforge/config.yaml`.
+This file is read by `spanforge config validate` and may be used to supply
+default values for CLI operations without requiring environment variables.
+
+### Schema
+
+```yaml
+spanforge:
+  signing_key: <string>          # (required) HMAC-SHA256 signing key
+  exporter: console              # console | jsonl | sqlite | otlp | webhook | datadog | grafana_loki
+  service_name: my-service       # logical name of the instrumented service
+  env: dev                       # dev | staging | prod
+  endpoint: ""                   # destination URL for exporters that require one
+  log_level: INFO                # DEBUG | INFO | WARNING | ERROR | CRITICAL
+```
+
+### Fields
+
+| Field | Required | Default | Description |
+|-------|----------|---------|-------------|
+| `spanforge.signing_key` | ✅ | *(none)* | HMAC-SHA256 key used to sign events. |
+| `spanforge.exporter` | — | `console` | Export backend. Valid: `console`, `jsonl`, `sqlite`, `otlp`, `webhook`, `datadog`, `grafana_loki`. |
+| `spanforge.service_name` | — | `my-service` | Logical service name attached to every event. |
+| `spanforge.env` | — | `dev` | Deployment environment tag. |
+| `spanforge.endpoint` | — | `""` | URL for exporters that need a destination (OTLP, webhook, etc.). |
+| `spanforge.log_level` | — | `INFO` | SDK log verbosity: `DEBUG`, `INFO`, `WARNING`, `ERROR`, `CRITICAL`. |
+
+### Generate the file
+
+```bash
+# Interactive wizard
+spanforge config init
+
+# Non-interactive (write defaults immediately)
+spanforge config init --non-interactive
+
+# Overwrite an existing file
+spanforge config init --force --non-interactive
+```
+
+### Validate the file
+
+```bash
+# Validate default path
+spanforge config validate
+
+# Validate explicit path + probe OTLP connectivity
+spanforge config validate --config /etc/spanforge/prod.yaml --check-connectivity
+```
+
+### Local secrets store
+
+CLI secrets (`spanforge secrets set/get/list/delete`) are persisted in
+`~/.spanforge/secrets.db` as a base64-encoded JSON object. This file is
+created with permissions `0o600` (user-read/write only). It is intentionally
+separate from `config.yaml` to avoid committing credentials to source control.
 
 ---
 

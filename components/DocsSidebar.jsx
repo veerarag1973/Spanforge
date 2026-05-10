@@ -43,6 +43,7 @@ const NAV = [
     group: 'User Guide',
     collapsible: true,
     items: [
+      { label: 'Overview', href: '/docs/guide' },
       { label: 'Events', href: '/docs/guide/events' },
       { label: 'Tracing API', href: '/docs/guide/tracing' },
       { label: 'HMAC Signing & Audit Chains', href: '/docs/guide/signing' },

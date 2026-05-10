@@ -1,21 +1,5 @@
 # Gate Pipeline (sf-gate)
 
-## Why this matters
-
-AI systems leak secrets. They emit PII. They drift from their schemas. And they do it silently — until production.
-
-A real scenario:
-
-> **Problem:** A team shipped a model update to production. The new version's prompt template included a debug line left by a developer: `API_KEY=sk-proj-...`. The key was live. Within 6 hours, the key was rotated after an alert from their cloud provider. The audit trail? Non-existent.
->
-> **Impact:** No signed record that the secret was detected, blocked, or remediated. The post-incident review found no evidence of when the key was introduced or how many requests had included it.
->
-> **With SpanForge:** `sf_gate` runs a secrets scan gate before every release. Secrets are detected and blocked before the artifact reaches production. The block is logged, signed, and included in the deployment audit record.
-
-A gate without a signed record isn't a compliance control — it's just a speed bump. `sf_gate` makes every block verifiable.
-
----
-
 > **Added in:** 2.0.7 (Phase 8)  
 > **Module:** `spanforge.sdk.gate`  
 > **Singleton:** `spanforge.sdk.sf_gate`
@@ -224,8 +208,8 @@ Use `sf_gate.evaluate_prri()` directly when you have a computed score:
 
 ```python
 result = sf_gate.evaluate_prri(
-    42.5,
-    project_id="my-agent",
+    "my-agent",
+    prri_score=42,
     dimension_breakdown={"hallucination": 0.42, "bias": 0.31, "pii_leak": 0.15},
 )
 print(result.verdict)   # PRRIVerdict.AMBER

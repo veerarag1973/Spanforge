@@ -4,14 +4,20 @@ This page summarizes the Phase 0 through Phase 7 GA spine for the May 2, 2026 re
 
 ---
 
-## v1.0.1 — Production Hardening (2026-05-02)
+## v1.0.1 — Production Hardening (2026-05-02 … 2026-05-08)
 
-**Phase 1B/1C: Explain model types, Scope circuit breaker, Validate enforcement modes, RBAC standard roles + JWT/YAML, Training Data Compliance Scanner**
+**Phase 1B/1C: Explain model types + full explain() API + @governed, Scope circuit breaker, Validate enforcement modes, RBAC standard roles + JWT/YAML, Training Data Compliance Scanner**
 
-### `sf_explain` (1B-1)
+### `sf_explain` full production hardening (CARD 1B-1 · 2026-05-08)
 
-- `ExplainModelType` enum — LLM, RAG, MULTI_AGENT, CLASSIFIER, EMBEDDING. Pass as `model_type` on `generate()`.
-- Retry + timeout on `_emit_signed_record()` — `max_retries=3`, `emit_timeout_sec=5.0`. Fail-safe: emit errors never propagate.
+- `ModelOutputType` enum — CLASSIFICATION, GENERATION, STRUCTURED, REJECTION, TOOL_CALL. Passed as `context["model_output_type"]` or auto-inferred from response shape.
+- `EUAIActClause` dataclass — Article 13 (transparency) and Article 14 (human oversight) clauses emitted on every `ExplainRecord`. Article 14 `satisfied = confidence_score >= threshold`.
+- `ExplainRecord` dataclass — canonical return type from `explain()`: `record_id`, `agent_id`, `model_output_type`, `decision_drivers`, `confidence_score`, `model_version`, `eu_ai_act_clauses`, `hmac_signature`, `timestamp`.
+- `SFExplainClient.explain(response, context) → ExplainRecord` — production hot-path method. Infers output type → extracts decision drivers → maps EU AI Act clauses → HMAC-signs via `sf_audit.append()`. Emit failures never propagate (fail-safe).
+- `@spanforge.governed` decorator — wraps any callable; auto-calls `sf_explain.explain()` on the return value. Supports bare `@governed` and parameterised `@governed(agent_id=..., confidence_threshold=...)` forms. Never raises on audit failure.
+- 24 new unit tests in `tests/test_sdk_explain.py` (7 test classes); **6 565 passed** total, coverage **91.27%**.
+
+### `sf_explain` model type hardening (1B-1 · 2026-05-02)
 
 ### `sf_scope` (1B-2)
 
@@ -24,9 +30,10 @@ This page summarizes the Phase 0 through Phase 7 GA spine for the May 2, 2026 re
 - `EnforcementMode` — STRICT / LENIENT / WARN / CORRECT.
 - `ValidationResult` dataclass, `enforce_event()`, `correct_event()`.
 - `sign_event_hmac(event, key)` — HMAC-SHA256 event signing.
-- `scan_dataset()` training data compliance scanner — PII field-name detection, PII value regex matching, required-field checks.
-- `DatasetScanFinding` + `DatasetScanReport` dataclasses.
-- CLI: `spanforge validate --dataset PATH [--fail-on-violations] [--required-fields FIELDS] [--format json|text]`.
+- `scan_dataset_compliance(path) → DatasetComplianceReport` — EU AI Act Article 10 file scanner (CARD 1C-4). Supports `.jsonl`, `.json`, `.csv`, `.txt`, `.parquet`. HMAC-signed report verifiable via `spanforge audit check-health`.
+- `Article10Clause` + `DatasetComplianceReport` dataclasses with four Article 10 clause checks (PII density, consent coverage, provenance coverage, bias signal).
+- CLI: `spanforge compliance validate-dataset PATH [--output report|json|pdf] [--no-sign]` and `spanforge validate --dataset PATH [--output report|json] [--no-sign]`.
+- Legacy: `scan_dataset()`, `DatasetScanFinding`, `DatasetScanReport` remain available in `spanforge.validate` for backwards compatibility.
 
 ### `sf_rbac` (1C-2)
 
@@ -36,7 +43,7 @@ This page summarizes the Phase 0 through Phase 7 GA spine for the May 2, 2026 re
 
 ### Tests
 
-- **6 541 passed**, 0 failed, 19 skipped (99 new tests vs v1.0.0). Combined branch+statement coverage: **90%** (25 757 / 28 762); statement coverage: **91%** (20 591 / 22 574).
+- **6 565 passed**, 0 failed, 19 skipped (123 new tests vs v1.0.0). Combined branch+statement coverage: **91.27%**; threshold 90% ✅.
 - 22 new E2E CLI tests across 7 workflow classes (Flows 26–32) in `tests/test_e2e_cli.py`: `TestAuditEraseWorkflow` (4), `TestAuditCheckHealthWorkflow` (5), `TestAuditVerifyWorkflow` (3), `TestAuditRotateKeyWorkflow` (3), `TestTrustBadgeWorkflow` (3), `TestTrustGateWorkflow` (3), `TestDoctorWorkflow` (1).
 
 ---
