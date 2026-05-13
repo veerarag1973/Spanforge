@@ -290,18 +290,21 @@ export default function Home() {
               <span className={styles.whoIcon} aria-hidden="true">&#x1F9F0;</span>
               <strong className={styles.whoTitle}>Developers</strong>
               <p className={styles.whoDesc}>Instrument, enforce, and audit AI actions from a single SDK surface. Zero required dependencies.</p>
-                          <span className={styles.whoLink}>Explore the SDK &rarr;</span>`n            </Link>
+                          <span className={styles.whoLink}>Explore the SDK &rarr;</span>
+            </Link>
             <Link href="/advisory" className={styles.whoCard}>
               <span className={styles.whoIcon} aria-hidden="true">&#x1F4CB;</span>
               <strong className={styles.whoTitle}>Compliance Teams</strong>
               <p className={styles.whoDesc}>Get auditor-ready evidence bundles mapped to EU AI Act, GDPR, HIPAA, SOC 2, and more.</p>
 
-                          <span className={styles.whoLink}>Explore Advisory &rarr;</span>`n            </Link>
+                          <span className={styles.whoLink}>Explore Advisory &rarr;</span>
+            </Link>
             <Link href="/contact" className={styles.whoCard}>
               <span className={styles.whoIcon} aria-hidden="true">&#x1F3DB;&#xFE0F;</span>
               <strong className={styles.whoTitle}>Enterprise Leaders</strong>
               <p className={styles.whoDesc}>Governed AI deployment with architecture reviews, evidence walkthroughs, and deployment planning.</p>
-                          <span className={styles.whoLink}>Talk to us &rarr;</span>`n            </Link>
+                          <span className={styles.whoLink}>Talk to us &rarr;</span>
+            </Link>
           </div>
         </div>
       </section>
