@@ -14,6 +14,7 @@ const NAV_PRIMARY = [
 ]
 
 const RESOURCES_MENU = [
+  { label: 'Compliance Guides', href: '/resources/guides', desc: 'EU AI Act, GDPR, HIPAA & more — read online or download PDF' },
   { label: 'Whitepapers', href: '/resources/whitepapers', desc: 'In-depth research on AI compliance' },
   { label: 'Library', href: '/resources', desc: 'Guides, papers & reference material' },
   { label: 'Blog', href: '/blog', desc: 'Updates, insights & announcements' },

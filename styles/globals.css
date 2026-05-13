@@ -280,3 +280,22 @@ hr {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ── Print / PDF — hide chrome globally ──────────────────── */
+@media print {
+  nav,
+  footer,
+  [data-pdf-hide] {
+    display: none !important;
+  }
+
+  body {
+    background: #fff !important;
+    color: #111 !important;
+  }
+
+  @page {
+    margin: 1.8cm 2cm;
+    size: A4;
+  }
+}
