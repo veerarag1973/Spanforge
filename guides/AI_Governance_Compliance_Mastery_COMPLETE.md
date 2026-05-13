@@ -727,6 +727,57 @@ Rate your current state for each capability:
 
 ---
 
+## SpanForge SDK: Cross-Framework Compliance in Practice
+
+The SpanForge SDK provides a single, unified compliance infrastructure that covers all six frameworks in this guide. Rather than building separate systems for each regulation, the `ComplianceMappingEngine` maps your AI telemetry to the specific clauses of each framework — from one event stream.
+
+### Cross-Framework SDK Mapping
+
+| Framework | SDK Framework Key | Core Clauses Covered | Primary Event Types |
+|-----------|------------------|---------------------|---------------------|
+| EU AI Act | `eu_ai_act` | Art. 13 (Transparency), Art. 14 (Human Oversight), Annex IV.5 (Technical Docs) | `explanation.*`, `hitl.*`, `consent.*`, `llm.guard.*` |
+| GDPR | `gdpr` | Art. 22 (Automated Decisions), Art. 25 (Privacy by Design), Art. 17 (Erasure) | `consent.*`, `hitl.*`, `llm.redact.*` |
+| HIPAA | `hipaa` | §164.312 (PHI Access Controls & Audit) | `llm.redact.*`, `llm.audit.*` |
+| ISO 42001 | `iso_42001` | A.5–A.10 (Full AI Management System controls) | Full event set |
+| NIST AI RMF | `nist_ai_rmf` | MAP 1.1 (Risk Identification), GOVERN, MEASURE, MANAGE | `llm.trace.*`, `llm.eval.*`, `model_registry.*`, `explanation.*` |
+| SOC 2 | `soc2` | CC6.1 (Access Controls), CC7.2 (Monitoring), CC8.1 (Change Management) | `llm.audit.*`, `llm.trace.*`, `model_registry.*` |
+
+### Generating Evidence Packages for Any Framework
+
+```python
+from spanforge.core.compliance_mapping import ComplianceMappingEngine
+
+engine = ComplianceMappingEngine()
+
+# Generate for any of the six frameworks with the same API
+for framework in ["eu_ai_act", "gdpr", "hipaa", "iso_42001", "nist_ai_rmf", "soc2"]:
+    package = engine.generate_evidence_package(
+        model_id="your-model-id",
+        framework=framework,
+        from_date="2026-01-01",
+        to_date="2026-03-31",
+    )
+    print(f"{framework}: {package.gap_report}")
+```
+
+### The Compliance Event Primitives
+
+Every framework maps to the same underlying event types — this is the architectural insight that makes cross-framework compliance tractable:
+
+| Event Category | Event Types | Frameworks Served |
+|----------------|-------------|------------------|
+| Consent | `consent.granted`, `consent.revoked`, `consent.violation` | GDPR Art. 22, EU AI Act Art. 14 |
+| Human-in-the-Loop | `hitl.queued`, `hitl.reviewed`, `hitl.escalated`, `hitl.timeout` | EU AI Act Art. 14, GDPR Art. 22, NIST MANAGE |
+| Explainability | `explanation.generated` | EU AI Act Art. 13, NIST MAP 1.1 |
+| PII Redaction | `llm.redact.*` | GDPR Art. 25, HIPAA §164.312 |
+| Audit Logging | `llm.audit.*` | SOC 2 CC6.1, HIPAA §164.312, ISO 42001 A.7 |
+| Model Registry | `model_registry.*` | ISO 42001 A.5, NIST GOVERN, SOC 2 CC8.1 |
+| Guardrails | `llm.guard.*` | EU AI Act Annex IV.5, NIST MANAGE |
+
+> **SDK Reference:** [Compliance & Tenant Isolation](/docs/guide/compliance) · [Evidence Export](/docs/evidence-export) · [Enterprise Integrations](/docs/enterprise-integrations)
+
+---
+
 ## Conclusion
 
 You now have:

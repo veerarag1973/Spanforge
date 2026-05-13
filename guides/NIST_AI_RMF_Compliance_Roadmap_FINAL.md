@@ -930,6 +930,61 @@ If a customer, auditor, or regulator assesses your AI RMF implementation:
 
 ---
 
+## SpanForge SDK: Implementing NIST AI RMF Functions
+
+The SpanForge SDK maps directly to all four NIST AI RMF core functions — GOVERN, MAP, MEASURE, and MANAGE — providing the telemetry, risk identification, measurement infrastructure, and control mechanisms the framework requires. The `ComplianceMappingEngine` generates evidence packages aligned to AI RMF subcategories.
+
+### Function-to-SDK Mapping
+
+| AI RMF Function | Subcategory | SpanForge Capability | Event Types |
+|----------------|-------------|---------------------|-------------|
+| GOVERN | Organizational policies and accountability | Model Registry, consent policies, policy engine | `model_registry.*`, `consent.*` |
+| GOVERN | Human oversight and escalation | Human-in-the-Loop Workflow Engine | `hitl.queued`, `hitl.reviewed`, `hitl.escalated` |
+| MAP 1.1 — Risk Identification | Identify and map AI risks | Model risk tiers, `llm.eval.*`, trace correlation | `llm.trace.*`, `llm.eval.*`, `model_registry.*`, `explanation.*` |
+| MAP 2 — AI Contextualization | Document AI system context | Model Registry with `owner`, `risk_tier`, metadata | `model_registry.*` |
+| MEASURE | Quantify and analyze AI risk | T.R.U.S.T. Scorecard, `metrics.aggregate()`, HallucCheck integrations | `llm.eval.*`, `explanation.*` |
+| MEASURE | Explainability coverage | `sf_explain.explain()`, `explanation_coverage_pct` metric | `explanation.generated` |
+| MANAGE | Treat and respond to AI risk | `sf-gate` CI/CD gate pipeline, `sf-alert` alert routing | `llm.guard.*`, `hitl.*` |
+| MANAGE | Ongoing monitoring | `sf-observe` observability SDK, anomaly alerts | All event types |
+
+### Generating Your NIST AI RMF Evidence Package
+
+```python
+from spanforge.core.compliance_mapping import ComplianceMappingEngine
+
+engine = ComplianceMappingEngine()
+package = engine.generate_evidence_package(
+    model_id="your-model-id",
+    framework="nist_ai_rmf",
+    from_date="2026-01-01",
+    to_date="2026-03-31",
+)
+
+print(package.gap_report)     # function-by-function coverage gaps
+print(package.attestation)    # HMAC-signed attestation
+```
+
+Or via CLI:
+
+```bash
+spanforge compliance generate \
+  --model-id your-model-id \
+  --framework nist_ai_rmf \
+  --from 2026-01-01 \
+  --to 2026-03-31
+```
+
+### Key SDK Features for NIST AI RMF Alignment
+
+- **GOVERN** — Model Registry with `risk_tier` classifications and the `sf-gate` policy engine operationalize GOVERN policies at the code level
+- **MAP** — `llm.trace.*` and `model_registry.*` events automatically populate MAP 1.1 risk identification; every model call is linked to a registered, risk-tiered model
+- **MEASURE** — T.R.U.S.T. Scorecard (Transparency · Reliability · UserTrust · Security · Traceability) and `explanation_coverage_pct` give you quantified risk metrics aligned to MEASURE subcategories
+- **MANAGE** — `sf-gate` blocks unsafe releases pre-deployment; `sf-alert` routes anomalies to Slack, PagerDuty, or OpsGenie for MANAGE response workflows
+
+> **SDK Reference:** [Compliance & Tenant Isolation](/docs/guide/compliance) · [Evidence Export](/docs/evidence-export) · [Gate Pipeline](/docs/guide/gate)
+
+---
+
 ## Section 15: Getting Started
 
 Implementing the NIST AI RMF is not a one-time project. Most organizations take 3–12 months to reach operational maturity, depending on the number of AI systems and their starting governance maturity.

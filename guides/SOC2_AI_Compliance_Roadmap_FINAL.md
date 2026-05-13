@@ -876,6 +876,60 @@ SOC 2 is designed to be complementary with other governance frameworks. If you h
 
 ---
 
+## SpanForge SDK: Implementing SOC 2 Controls
+
+The SpanForge SDK provides the access logging, audit evidence, and continuous monitoring infrastructure that SOC 2 Type II requires. The `ComplianceMappingEngine` maps your AI telemetry to Trust Services Criteria, generating the evidence packages your auditors need to issue a clean opinion.
+
+### Trust Services Criteria-to-SDK Mapping
+
+| SOC 2 Criteria | Requirement | SpanForge Capability | Event Types |
+|----------------|-------------|---------------------|-------------|
+| CC6.1 — Logical Access Controls | AI model access logging and governance | `sf-audit`, HMAC audit chains, Model Registry | `llm.audit.*`, `llm.trace.*`, `model_registry.*` |
+| CC6.6 — Encryption at Rest | Data encryption and key management | AES-256-GCM, envelope encryption via cloud KMS | — |
+| CC7.2 — System Monitoring | Continuous monitoring and alerting | `sf-alert` (Slack, PagerDuty, OpsGenie, VictorOps), `sf-observe` | All event types |
+| CC8.1 — Change Management | AI model lifecycle governance | `model_registry.registered`, `model_registry.deprecated`, `model_registry.retired` | `model_registry.*` |
+| CC9.2 — Third-Party Risk | AI vendor governance | Enterprise Integrations (OpenAI, Anthropic, Azure OpenAI, LangChain) | `llm.trace.*`, `llm.audit.*` |
+| A1.2 — Availability | System availability monitoring | EventStream, health probes, export backends | All event types |
+
+### Generating Your SOC 2 Evidence Package
+
+```python
+from spanforge.core.compliance_mapping import ComplianceMappingEngine
+
+engine = ComplianceMappingEngine()
+package = engine.generate_evidence_package(
+    model_id="your-model-id",
+    framework="soc2",
+    from_date="2026-01-01",
+    to_date="2026-03-31",
+)
+
+print(package.gap_report)     # criteria-by-criteria coverage gaps
+print(package.attestation)    # HMAC-signed attestation for auditors
+```
+
+Or via CLI:
+
+```bash
+spanforge compliance generate \
+  --model-id your-model-id \
+  --framework soc2 \
+  --from 2026-01-01 \
+  --to 2026-03-31
+```
+
+### Key SDK Features for SOC 2 Compliance
+
+- **Tamper-Evident Audit Trail** — Every AI model call generates HMAC-signed `llm.audit.*` events; alter one event and the entire chain breaks — exactly what CC6.1 requires
+- **Continuous Monitoring** — `sf-alert` routes anomalies to 9 sinks (Slack, Teams, PagerDuty, OpsGenie, VictorOps, Incident.io, SMS, Webhook) with deduplication and rate limiting
+- **Model Change Management** — Model Registry lifecycle events (`registered`, `deprecated`, `retired`) provide the change management evidence CC8.1 requires
+- **Multi-Tenant Isolation** — `verify_tenant_isolation()` verifies that customer data is strictly separated — critical for CC6.1 in multi-tenant SaaS environments
+- **SIEM Integration** — `spanforge export siem` streams CEF or LEEF lines to any SIEM for audit period evidence collection
+
+> **SDK Reference:** [Compliance & Tenant Isolation](/docs/guide/compliance) · [Alert Routing](/docs/guide/alert) · [Evidence Export](/docs/evidence-export)
+
+---
+
 ## Section 16: Getting Started
 
 SOC 2 is the most process-intensive compliance framework in this series because it requires not just good controls, but consistent evidence of those controls operating over time.

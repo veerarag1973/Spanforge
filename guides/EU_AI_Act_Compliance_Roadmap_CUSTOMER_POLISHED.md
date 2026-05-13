@@ -536,6 +536,59 @@ If an auditor shows up, can you answer these?
 
 ---
 
+## SpanForge SDK: Implementing EU AI Act Obligations
+
+The SpanForge SDK operationalizes EU AI Act requirements directly — mapping your AI telemetry to specific Articles, generating HMAC-signed evidence packages, and producing the audit documentation conformity assessors expect.
+
+### Article-to-SDK Mapping
+
+| EU AI Act Clause | Requirement | SpanForge Capability | Event Types |
+|-----------------|-------------|---------------------|-------------|
+| Art. 13 — Transparency | Explainability of AI decisions | `sf_explain.explain()` · `@spanforge.governed` | `explanation.generated` |
+| Art. 14 — Human Oversight | HITL review of high-risk AI | Human-in-the-Loop Workflow Engine | `hitl.queued`, `hitl.reviewed`, `hitl.escalated` |
+| Art. 14 — Human Oversight | Consent for automated processing | Consent boundary monitoring | `consent.granted`, `consent.revoked`, `consent.violation` |
+| Annex IV.5 — Technical Documentation | Safety and oversight audit trail | `sf-audit`, HMAC audit chains, T.R.U.S.T. scorecard | `llm.guard.*`, `llm.audit.*`, `hitl.*` |
+| Art. 10 — Data Governance | Training data PII audit | `SFPIIClient.audit_training_data()` | `llm.redact.*` |
+
+### Generating Your EU AI Act Evidence Package
+
+```python
+from spanforge.core.compliance_mapping import ComplianceMappingEngine
+
+engine = ComplianceMappingEngine()
+package = engine.generate_evidence_package(
+    model_id="your-model-id",
+    framework="eu_ai_act",
+    from_date="2026-01-01",
+    to_date="2026-03-31",
+)
+
+print(package.gap_report)     # clause-by-clause coverage gaps
+print(package.attestation)    # HMAC-signed attestation for auditors
+```
+
+Or via CLI:
+
+```bash
+spanforge compliance generate \
+  --model-id your-model-id \
+  --framework eu_ai_act \
+  --from 2026-01-01 \
+  --to 2026-03-31
+```
+
+### Key SDK Features for EU AI Act Compliance
+
+- **Explainability** — `sf_explain.explain(response, context)` returns a signed `ExplainRecord` with Art. 13/14 clause mapping and `decision_drivers` on every call
+- **Human-in-the-Loop** — Full state machine (PENDING → APPROVED / REJECTED → CLOSED) with SLA auto-escalation and role-based action matrix
+- **Model Registry** — Register models with `owner` and `risk_tier`; attestations auto-warn on ungoverned models
+- **CI/CD Gate Pipeline** — `sf-gate` evaluates release quality gates and blocks unsafe releases before production
+- **T.R.U.S.T. Scorecard** — Five-pillar trust assessment (Transparency · Reliability · UserTrust · Security · Traceability) with SVG badge
+
+> **SDK Reference:** [Compliance & Tenant Isolation](/docs/guide/compliance) · [Evidence Export](/docs/evidence-export) · [Enterprise Integrations](/docs/enterprise-integrations)
+
+---
+
 ## Section 16: Getting Started
 
 Building an operational AI governance infrastructure isn't a one-time project.

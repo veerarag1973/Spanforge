@@ -710,6 +710,60 @@ If the Office for Civil Rights investigates, can you answer these?
 
 ---
 
+## SpanForge SDK: Implementing HIPAA Obligations
+
+The SpanForge SDK provides the PHI access controls, audit logging, and de-identification infrastructure that HIPAA requires — with HMAC-signed evidence packages that map directly to the Security Rule safeguards your auditors need to see.
+
+### Safeguard-to-SDK Mapping
+
+| HIPAA Rule / Section | Requirement | SpanForge Capability | Event Types |
+|---------------------|-------------|---------------------|-------------|
+| §164.312 — PHI Access Controls | PHI access audit trail | `sf-audit`, HMAC audit chains | `llm.audit.*`, `llm.trace.*` |
+| §164.312 — PHI Audit Controls | Tamper-evident access logs | HMAC audit chains with gap detection | `llm.audit.*` |
+| §164.312(e) — PHI Transmission | No PHI in telemetry | `SFPIIClient` PII redaction pipeline | `llm.redact.*` |
+| §164.308 — Administrative Safeguards | Model governance and oversight | Model Registry, T.R.U.S.T. Scorecard | `model_registry.*` |
+| HIPAA Safe Harbor | De-identify 18 PHI identifiers | `SFPIIClient.safe_harbor_deidentify()` | — |
+| §164.308(a)(6) — Incident Procedures | Detect and respond to PHI incidents | Alert routing (`sf-alert`), breach detection | `llm.guard.*` |
+
+### Generating Your HIPAA Evidence Package
+
+```python
+from spanforge.core.compliance_mapping import ComplianceMappingEngine
+
+engine = ComplianceMappingEngine()
+package = engine.generate_evidence_package(
+    model_id="your-model-id",
+    framework="hipaa",
+    from_date="2026-01-01",
+    to_date="2026-03-31",
+)
+
+print(package.gap_report)     # safeguard-by-safeguard coverage gaps
+print(package.attestation)    # HMAC-signed attestation for auditors
+```
+
+Or via CLI:
+
+```bash
+spanforge compliance generate \
+  --model-id your-model-id \
+  --framework hipaa \
+  --from 2026-01-01 \
+  --to 2026-03-31
+```
+
+### Key SDK Features for HIPAA Compliance
+
+- **HIPAA Safe Harbor De-identification** — `SFPIIClient.safe_harbor_deidentify(text)` removes all 18 PHI identifier categories before data leaves your AI pipeline
+- **PHI Audit Trail** — Every PHI access generates `llm.audit.*` events; HMAC chaining makes the log tamper-evident
+- **Zero-Egress PII Redaction** — Runs fully locally; no PHI is sent to external services for scanning
+- **Air-Gapped Deployment** — Full offline mode with zero egress for environments where PHI cannot leave the network
+- **Encryption at Rest** — AES-256-GCM with envelope encryption via cloud KMS; FIPS 140-2 mode available
+
+> **SDK Reference:** [Compliance & Tenant Isolation](/docs/guide/compliance) · [PII Redaction](/docs/guide/redaction) · [Evidence Export](/docs/evidence-export)
+
+---
+
 ## Section 16: Getting Started
 
 Building an operational HIPAA AI governance infrastructure is not a one-time project.

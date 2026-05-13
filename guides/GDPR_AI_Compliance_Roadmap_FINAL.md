@@ -815,6 +815,59 @@ If a supervisory authority investigates, can you answer these?
 
 ---
 
+## SpanForge SDK: Implementing GDPR Obligations
+
+The SpanForge SDK provides built-in privacy infrastructure that maps directly to GDPR obligations — consent boundary monitoring, PII redaction, right-to-erasure tombstones, and Article 30 Records of Processing Activities — all generating signed audit evidence for regulators.
+
+### Article-to-SDK Mapping
+
+| GDPR Clause | Requirement | SpanForge Capability | Event Types |
+|------------|-------------|---------------------|-------------|
+| Art. 22 — Automated Decision-Making | Consent and human oversight for automated decisions | Consent monitoring · Human-in-the-Loop Workflow Engine | `consent.granted`, `consent.revoked`, `hitl.queued`, `hitl.reviewed` |
+| Art. 25 — Privacy by Design | PII handling before export | `SFPIIClient` PII redaction pipeline | `llm.redact.*`, `consent.*` |
+| Art. 17 — Right to Erasure | Delete personal data on request | `SFPIIClient.erase_subject()` with tombstone events | Tombstone events preserving chain integrity |
+| Art. 30 — Records of Processing | GDPR Article 30 RoPA | `sf-audit` GDPR Art. 30 RoPA generation | `llm.audit.*` |
+| Art. 32 — Security of Processing | Tamper-evident audit trail | HMAC audit chains, AES-256-GCM at rest | All event types |
+
+### Generating Your GDPR Evidence Package
+
+```python
+from spanforge.core.compliance_mapping import ComplianceMappingEngine
+
+engine = ComplianceMappingEngine()
+package = engine.generate_evidence_package(
+    model_id="your-model-id",
+    framework="gdpr",
+    from_date="2026-01-01",
+    to_date="2026-03-31",
+)
+
+print(package.gap_report)     # clause-by-clause coverage gaps
+print(package.attestation)    # HMAC-signed attestation for auditors
+```
+
+Or via CLI:
+
+```bash
+spanforge compliance generate \
+  --model-id your-model-id \
+  --framework gdpr \
+  --from 2026-01-01 \
+  --to 2026-03-31
+```
+
+### Key SDK Features for GDPR Compliance
+
+- **PII Redaction** — Presidio NLP backend covering 15+ entity types (SSN, email, AADHAAR, credit card, IBAN, and more); runs locally with zero data egress
+- **Right to Erasure** — `SFPIIClient.erase_subject()` removes personal data while preserving HMAC chain integrity with tombstone events
+- **Consent Boundaries** — `consent.granted`, `consent.revoked`, and `consent.violation` events give you a complete consent audit trail
+- **Art. 30 RoPA** — `sf-audit` generates Records of Processing Activities with no extra configuration
+- **GDPR Art. 22 Gate** — `consent.*` + `hitl.*` events together prove automated decisions have both consent and human oversight
+
+> **SDK Reference:** [Compliance & Tenant Isolation](/docs/guide/compliance) · [PII Redaction](/docs/guide/redaction) · [Audit Service](/docs/guide/audit)
+
+---
+
 ## Section 19: Getting Started
 
 Building an operational AI privacy governance infrastructure isn't a one-time project.

@@ -909,6 +909,60 @@ ISO 42001 is a management system standard. The EU AI Act has specific technical 
 
 ---
 
+## SpanForge SDK: Implementing ISO 42001 Controls
+
+The SpanForge SDK maps directly to ISO 42001 Annex A controls — providing the continuous monitoring, evidence chain, and governance infrastructure an AI Management System requires, and generating the signed evidence packages certification auditors expect.
+
+### Annex A-to-SDK Mapping
+
+| ISO 42001 Control | Requirement | SpanForge Capability | Event Types |
+|------------------|-------------|---------------------|-------------|
+| A.5 — AI Policy | Governance policies and oversight | Model Registry, policy engine, governance event types | `model_registry.*`, `consent.*` |
+| A.6 — AI Objectives | Measurable AI performance and trust objectives | T.R.U.S.T. Scorecard, `metrics.aggregate()` | `llm.eval.*`, `explanation.*` |
+| A.7 — AI System Documentation | Technical documentation of AI systems | HMAC audit chains, evidence packages, `sf-audit` | Full event set |
+| A.8 — AI Impact Assessment | Risk and impact assessment records | `ComplianceMappingEngine` gap analysis, Model Registry risk tiers | `model_registry.*`, `llm.eval.*` |
+| A.9 — AI Supplier Relationships | Third-party AI governance | Enterprise Integrations (OpenAI, Anthropic, Azure OpenAI, LangChain) | `llm.trace.*`, `llm.audit.*` |
+| A.10 — AI System Monitoring | Continuous monitoring and review | `sf-alert` alert routing, `sf-observe` observability SDK | All event types |
+
+### Generating Your ISO 42001 Evidence Package
+
+```python
+from spanforge.core.compliance_mapping import ComplianceMappingEngine
+
+engine = ComplianceMappingEngine()
+package = engine.generate_evidence_package(
+    model_id="your-model-id",
+    framework="iso_42001",
+    from_date="2026-01-01",
+    to_date="2026-03-31",
+)
+
+print(package.gap_report)     # control-by-control coverage gaps
+print(package.attestation)    # HMAC-signed attestation for certification auditors
+```
+
+Or via CLI:
+
+```bash
+spanforge compliance generate \
+  --model-id your-model-id \
+  --framework iso_42001 \
+  --from 2026-01-01 \
+  --to 2026-03-31
+```
+
+### Key SDK Features for ISO 42001 Compliance
+
+- **AIMS-Ready Event Set** — ISO 42001 A.7–A.9 map to the full spanforge event set; every model call, consent boundary, HITL review, and policy decision is captured
+- **Gap Analysis** — `package.gap_report` shows coverage against all Annex A controls with remediation steps
+- **Model Lifecycle Governance** — `model_registry.registered`, `model_registry.deprecated`, `model_registry.retired` events document AI system lifecycle for A.5/A.8
+- **Continuous Monitoring** — `sf-observe` exports spans to OTLP/Datadog/Grafana with W3C TraceContext for A.10 continuous monitoring
+- **T.R.U.S.T. Scorecard** — Maps directly to ISO 42001 A.6 measurable AI objectives (Transparency, Reliability, UserTrust, Security, Traceability)
+
+> **SDK Reference:** [Compliance & Tenant Isolation](/docs/guide/compliance) · [Evidence Export](/docs/evidence-export) · [Enterprise Integrations](/docs/enterprise-integrations)
+
+---
+
 ## Section 15: Getting Started
 
 Building a governance-ready AI management system takes time. Most organizations take 6–18 months from initial gap analysis to certification readiness, depending on the number of AI systems and the maturity of existing governance.
