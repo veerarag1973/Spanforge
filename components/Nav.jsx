@@ -25,6 +25,8 @@ export default function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [resourcesOpen, setResourcesOpen] = useState(false)
   const resourcesRef = useRef(null)
+  const overlayRef = useRef(null)
+  const closeBtnRef = useRef(null)
   const pathname = usePathname()
 
   useEffect(() => {
