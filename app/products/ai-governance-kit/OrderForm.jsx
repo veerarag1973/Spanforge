@@ -66,9 +66,9 @@ export default function OrderForm() {
       return
     }
     try {
-      const res = await fetch('https://formspree.io/f/xeedjdjv', {
+      const res = await fetch('/api/order', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           fullName: form.fullName,
           company: form.company,
@@ -76,14 +76,14 @@ export default function OrderForm() {
           products: Array.from(selected).join(', '),
         }),
       })
+      const data = await res.json().catch(() => ({}))
       if (!res.ok) {
-        const data = await res.json().catch(() => ({}))
         setError(data?.error ?? 'Submission failed. Please try again.')
         return
       }
       setSubmitted(true)
     } catch {
-      setError('Network error. Please check your connection and try again.')
+      setError('Submission failed. Please try again.')
     }
   }
 
