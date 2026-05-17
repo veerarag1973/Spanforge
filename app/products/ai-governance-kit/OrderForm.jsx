@@ -73,7 +73,9 @@ export default function OrderForm() {
           fullName: form.fullName,
           company: form.company,
           email: form.email,
-          products: Array.from(selected).join(', '),
+          products: Array.from(selected)
+            .map((v) => PRODUCT_OPTIONS.find((o) => o.value === v)?.label ?? v)
+            .join(', '),
         }),
       })
       const data = await res.json().catch(() => ({}))
