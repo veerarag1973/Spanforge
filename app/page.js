@@ -499,6 +499,23 @@ export default function Home() {
         </div>
       </section>
 
+      {/* AI Governance Kit product spotlight */}
+      <section className={styles.productsSpotlightSection} aria-labelledby="products-spotlight-heading">
+        <div className="container">
+          <p className={styles.sectionLabel}>Products</p>
+          <div className={styles.productsSpotlightCard}>
+            <div className={styles.productsSpotlightBadge}>New</div>
+            <h2 id="products-spotlight-heading" className={styles.productsSpotlightH2}>AI Governance Kit</h2>
+            <p className={styles.productsSpotlightSub}>
+              Everything your team needs to implement AI governance from day one — master policies, risk assessments, model cards, incident response plans, inventory registers, and a 30-day roadmap. Ready-to-use documents built for compliance teams, legal, and AI program leads.
+            </p>
+            <Link href="/products/ai-governance-kit" className="btn-primary" style={{display:'inline-flex',marginTop:'1.5rem'}}>
+              Explore AI Governance Kit &rarr;
+            </Link>
+          </div>
+        </div>
+      </section>
+
       <section className={styles.newsletterSection} aria-labelledby="newsletter-heading">
         <div className="container">
           <NewsletterSignup />

@@ -31,6 +31,9 @@ Desktop.ini
 _legacy-src/
 vite.config.js
 
+# Customer delivery files (never commit)
+Spanforge Customer Delivery/
+
 # Internal strategy docs (never commit)
 plannedproducts.md
 spanforge-ts-migration.md
