@@ -148,7 +148,7 @@ export default function Home() {
             <div className={styles.heroCopy}>
               <div className={styles.eyebrowRow}>
                 <span className={styles.badge}>General Availability</span>
-                <span className={styles.heroMeta}>SpanForge SDK v1.0.3</span>
+                <span className={styles.heroMeta}>SpanForge SDK v1.0.4</span>
               </div>
               <h1 id="hero-heading" className={styles.heroH1}>
                 Ship AI that passes audits. Signed evidence in 5 minutes.
@@ -235,7 +235,7 @@ export default function Home() {
             <p className={styles.testimonialAttrib}>&mdash; {TESTIMONIAL.role}, {TESTIMONIAL.org}</p>
           </div>
           <div className={styles.momentumStrip}>
-            <span className={styles.momentumItem}>SDK v1.0.3 Generally Available</span>
+            <span className={styles.momentumItem}>SDK v1.0.4 Generally Available</span>
             <span className={styles.momentumSep} aria-hidden="true">&middot;</span>
             <span className={styles.momentumItem}>Launched May 2026</span>
             <span className={styles.momentumSep} aria-hidden="true">&middot;</span>
@@ -525,7 +525,7 @@ export default function Home() {
       <section className={styles.dualCtaSection} aria-labelledby="cta-heading">
         <div className="container">
           <div className={styles.ctaBlock}>
-            <p className={styles.ctaEyebrow}>Open source &middot; MIT licensed &middot; pip install spanforge &middot; GA v1.0.3 &middot; Released May 2026</p>
+            <p className={styles.ctaEyebrow}>Open source &middot; MIT licensed &middot; pip install spanforge &middot; GA v1.0.4 &middot; Released May 2026</p>
             <h2 id="cta-heading" className={styles.ctaBlockH2}>Get signed AI evidence in under five minutes.</h2>
             <p className={styles.ctaBlockSub}>
               Install the SDK, instrument an AI action, and generate a signed evidence bundle &mdash; before you involve procurement. Community support on GitHub. Enterprise teams get priority response.
