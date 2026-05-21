@@ -52,6 +52,15 @@ const CLI_COMMANDS = [
   { cmd: 'report',              desc: 'Generate a static HTML trace report from a JSONL events file.' },
   { cmd: 'serve',               desc: 'Start a local HTTP trace viewer at /traces (default port 8888).' },
   { cmd: 'check-consumers',     desc: 'Assert all registered consumers are compatible with the installed schema.' },
+  { cmd: 'config init',          desc: 'Interactive wizard (or --non-interactive) to generate ~/.spanforge/config.yaml with exporter, service name, environment, endpoint, signing key, and log level.' },
+  { cmd: 'config validate',      desc: 'Validate ~/.spanforge/config.yaml against the SpanForge schema. --check-connectivity probes TCP connectivity to the OTLP endpoint. Exit codes: 0 valid, 1 schema errors, 2 read error.' },
+  { cmd: 'secrets set',          desc: 'Store a named secret in the local secrets store (~/.spanforge/secrets.db, permissions 0o600).' },
+  { cmd: 'secrets get',          desc: 'Retrieve and print a stored secret value by name.' },
+  { cmd: 'secrets list',         desc: 'List stored secret key names (values not shown).' },
+  { cmd: 'secrets delete',       desc: 'Remove a named secret from the local secrets store.' },
+  { cmd: 'dev reset',            desc: 'Delete ~/.spanforge/config.yaml (interactive prompt). --dry-run lists files that would be removed without deleting them.' },
+  { cmd: 'export siem',          desc: 'Stream CEF or LEEF formatted lines from a JSONL events file (or stdin) to any SIEM. Options: --format cef|leef, --input FILE.' },
+  { cmd: 'audit cec generate',   desc: 'Generate a Compliance Evidence Chain bundle without Python code — signed ZIP with regulatory clause maps, DPA generation, and RFC 3161 timestamps for auditor hand-off.' },
 ]
 
 const INTEGRATIONS = [
@@ -124,7 +133,7 @@ export default function SdkPage() {
           <p className={styles.heroSub}>
             <code className={styles.inlineCode}>pip install spanforge</code> — zero required
             dependencies, all 15 spanforge namespaces, a full CLI, and integrations for
-            OpenAI, LangChain, LlamaIndex, CrewAI, and Datadog.
+            OpenAI, Anthropic, LangChain, LangGraph, LlamaIndex, CrewAI, Datadog, and more.
           </p>
           <div className={styles.heroCtas}>
             <Link href="/spanforgecore/debug" className="btn-primary">Debug tooling →</Link>
@@ -158,7 +167,7 @@ export default function SdkPage() {
                 <span className={styles.codeBlockLang}>bash</span>
               </div>
               <pre className={styles.codeBlockBody}>{`spanforge --version
-# spanforge 1.0.3`}</pre>
+# spanforge 1.0.4`}</pre>
             </div>
 
             <h3 style={{ fontFamily: 'var(--font-dm-sans)', fontSize: '0.95rem', fontWeight: 600, color: 'var(--light)', marginTop: '2.5rem', marginBottom: '0.75rem' }}>

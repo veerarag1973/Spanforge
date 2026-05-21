@@ -69,6 +69,11 @@ const FEATURES = [
     title: 'Export to any backend',
     desc: 'OTLP, Webhook, JSONL, Datadog, Grafana Loki, Splunk, Elastic, SIEM (CEF/Syslog), OpenInference, and WORM-compliant S3/GCS backends. EventStream multiplexer with Apache Kafka support.',
   },
+  {
+    num: '13',
+    title: 'Security Review (sf-security)',
+    desc: 'OWASP API Security Top 10 audit, STRIDE threat modelling, dependency vulnerability scanning, static analysis, and secrets-in-logs detection — integrated into the compliance evidence workflow.',
+  },
 ]
 
 const HOW_IT_WORKS = [

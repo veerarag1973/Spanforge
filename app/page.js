@@ -30,7 +30,7 @@ const VERIFIABLE_FACTS = [
   { fact: 'pip install spanforge', detail: 'Available on PyPI' },
   { fact: 'Zero runtime deps', detail: 'No heavy platform required' },
   { fact: 'Python 3.9+', detail: 'Broad version support' },
-  { fact: 'v1.0.3 GA', detail: 'Generally Available release' },
+  { fact: 'v1.0.4 GA', detail: 'Generally Available release' },
 ]
 
 const TESTIMONIAL = {
